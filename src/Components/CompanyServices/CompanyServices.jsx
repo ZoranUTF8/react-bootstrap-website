@@ -6,17 +6,17 @@ const CompanyServices = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-12 text-center">
-            <h1 className="main-heading">Vision Mission Values</h1>
+            <h1 className="main-heading">Company Services</h1>
             <div className="underline mx-auto mt-3 mb-3"></div>
           </div>
         </div>
       </div>
 
-      <div className="container">
+      <div className="container p-5">
         <div className="row g-3">
           {ServicesData.map((services) => (
             <div className="col-12 col-md-6 col-lg-4" key={services.id}>
-              <div className="card shadow">
+              <div className="card shadow hoverable">
                 <img
                   src={services.imgPath}
                   className="card-img-top"

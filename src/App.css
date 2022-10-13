@@ -52,3 +52,12 @@
   height: 30vh;
   object-fit: fill;
 }
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+.footer a:hover {
+  color: gray;
+  text-decoration: underline;
+}

@@ -1,11 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  // If admin logged in exists than show employes status navbar
+  const [admin, setAdmin] = useState(true);
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
-      
         <Link to={"/"} className="navbar-brand">
           Company
         </Link>
@@ -39,35 +40,45 @@ const Navbar = () => {
                 Contact
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Employe management
-              </a>
-              {/* ADD LINK LATER FOR CRUD OPERATIONS */}
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
+
+            {/* ADD LINK LATER FOR CRUD OPERATIONS */}
+            {admin ? (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Employe management
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      View Employees
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Add Employees
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Remove Employees
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Update Employees
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </div>
