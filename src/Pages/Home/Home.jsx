@@ -1,17 +1,38 @@
 import React from "react";
-import { Slider } from "../../Components";
+import { Slider, Vmv, CompanyServices } from "../../Components";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="container">
-      <div className="card mt-3">
-        <div className="card-body">
-          <div className="card-title">
-            <h1>Home page</h1>
-            <Slider />
+    <div>
+      <Slider />
+
+      <section className="section pt-5 mb-5">
+        <div className="container">
+          <div className="row">
+            <div className="text-center">
+              <div className="main-heading">
+                <h1>Our Company</h1>
+                <div className="underline mx-auto mt-3 mb-3"></div>
+                <p>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda cum aliquam, in non libero dicta pariatur quas
+                  dolore temporibus nihil dolores incidunt neque, consequatur
+                  aspernatur molestias expedita ratione possimus! Aspernatur.
+                </p>
+                <Link to="about" className="btn btn-warning shadow">
+                  Read more
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+      {/* VMV */}
+      <Vmv />
+
+      {/* SERVICES */}
+      <CompanyServices />
     </div>
   );
 };

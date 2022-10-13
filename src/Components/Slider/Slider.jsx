@@ -8,15 +8,20 @@ const Slider = () => {
       className="carousel slide"
       data-bs-ride="carousel"
     >
-      Name
       <div className="carousel-inner">
         {imagesData.map((image) => (
           <div
             key={image.id}
             className="carousel-item active"
             data-bs-interval="2000"
+            style={{ height: "500px" }}
           >
-            <img src={image.imgPath} className="d-block w-100" alt="..." />
+            <img
+              src={image.imgPath}
+              className="d-block w-100"
+              alt="Slider images."
+              style={{ height: "500px", objectFit: "fill" }}
+            />
           </div>
         ))}
       </div>
