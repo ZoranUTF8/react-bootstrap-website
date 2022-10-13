@@ -20,7 +20,7 @@ const Home = () => {
                   dolore temporibus nihil dolores incidunt neque, consequatur
                   aspernatur molestias expedita ratione possimus! Aspernatur.
                 </p>
-                <Link to="about" className="btn btn-warning shadow">
+                <Link to="about" className="btn btn-info shadow">
                   Read more
                 </Link>
               </div>

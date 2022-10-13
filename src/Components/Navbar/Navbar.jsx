@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // If admin logged in exists than show employes status navbar
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(false);
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
         <Link to={"/"} className="navbar-brand">
-          Company
+          Company Name
         </Link>
 
         <button
@@ -77,7 +77,11 @@ const Navbar = () => {
                 </ul>
               </li>
             ) : (
-              ""
+              <li className="nav-item">
+                <Link to="contact" className="nav-link">
+                  Login
+                </Link>
+              </li>
             )}
           </ul>
         </div>

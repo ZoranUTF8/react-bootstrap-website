@@ -36,6 +36,11 @@
     transform: rotate(360deg);
   }
 }
+/* NAVBAR */
+nav .nav-link:hover {
+  color: #282c34;
+  text-decoration: underline;
+}
 
 .main-heading {
   color: gray;
