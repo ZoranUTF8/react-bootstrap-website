@@ -3,11 +3,11 @@ import React from "react";
 const ContactUs = () => {
   return (
     <div>
-      <section className="bg-light p-5">
+      <section className=" p-5">
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <h4>About Us</h4>
+              <h4>Contact Us</h4>
             </div>
           </div>
         </div>
