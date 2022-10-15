@@ -2,6 +2,8 @@ import "./App.css";
 import { Home, AboutUs, ContactUs, Error, LoginPage } from "./Pages";
 import { Routes, Route } from "react-router-dom";
 import { Navbar, Footer } from "./Components";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="contact" element={<ContactUs />} />
         <Route path="*" element={<Error />} />
       </Routes>
+
+      <ToastContainer />
       {/* FOOTER */}
       <Footer />
     </>
