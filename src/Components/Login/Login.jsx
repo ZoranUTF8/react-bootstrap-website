@@ -1,6 +1,8 @@
 import { useState } from "react";
 import loginPage from "../../assets/images/loginPage.svg";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser,registerUser } from "../../features/user/userSlice";
 
 const initialUserState = {
   name: "",
@@ -10,9 +12,13 @@ const initialUserState = {
 };
 
 const Login = () => {
-  
+  // Component state
   const [userState, setUserState] = useState(initialUserState);
 
+  const { user, isLoading } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  // Component functions
   const handleChange = (evt) => {
     evt.preventDefault();
     const { name, value } = evt.target;
@@ -34,9 +40,11 @@ const Login = () => {
         draggable: true,
         theme: "light",
       });
-    } else {
-      console.log("all good", userState);
     }
+
+    isMember
+      ? dispatch(loginUser({ email, password }))
+      : dispatch(registerUser({ email, password, name }));
   };
 
   const toggleMember = () => {
