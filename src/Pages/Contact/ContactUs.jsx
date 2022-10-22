@@ -19,61 +19,63 @@ const ContactUs = () => {
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-6">
-                  <h6>Contact us</h6>
-                  <hr />
+                  <form>
+                    <h6>Contact us</h6>
+                    <hr />
 
-                  <div className="form-group">
-                    <label htmlFor="fullName" className="mb-1">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full name"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phoneNumber" className="mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="number"
-                      name="phoneNumber"
-                      placeholder="Phone Number"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email" className="mb-1">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email Address"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="message" className="mb-1">
-                      Message
-                    </label>
-                    <textarea
-                      type="textare"
-                      name="message"
-                      placeholder="Enter your message"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="form-group py-3">
-                    <button
-                      type="button"
-                      className="btn btn-warning shadow w-100"
-                    >
-                      Send
-                    </button>
-                  </div>
+                    <div className="form-group">
+                      <label htmlFor="fullName" className="mb-1">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        name="fullName"
+                        placeholder="Full name"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="phoneNumber" className="mb-1">
+                        Phone Number
+                      </label>
+                      <input
+                        type="number"
+                        name="phoneNumber"
+                        placeholder="Phone Number"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email" className="mb-1">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="message" className="mb-1">
+                        Message
+                      </label>
+                      <textarea
+                        type="textare"
+                        name="message"
+                        placeholder="Enter your message"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group py-3">
+                      <button
+                        type="button"
+                        className="btn btn-warning shadow w-100"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </form>
                 </div>
 
                 <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center">

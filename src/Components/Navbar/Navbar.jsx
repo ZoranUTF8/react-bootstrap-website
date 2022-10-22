@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
-  // If admin logged in exists than show employes status navbar
+  // If admin logged in exists than show employees status navbar
+  // get adming from the store
   const [admin, setAdmin] = useState(false);
+  const { isAdmin } = useSelector((store) => store.user);
+
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
@@ -42,7 +46,7 @@ const Navbar = () => {
             </li>
 
             {/* ADD LINK LATER FOR CRUD OPERATIONS */}
-            {admin ? (
+            {isAdmin ? (
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -51,7 +55,7 @@ const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Employe management
+                  Employee management
                 </a>
                 <ul className="dropdown-menu">
                   <li>

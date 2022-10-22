@@ -2,7 +2,7 @@ import { useState } from "react";
 import loginPage from "../../assets/images/loginPage.svg";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser,registerUser } from "../../features/user/userSlice";
+import { loginUser, registerUser } from "../../features/user/userSlice";
 
 const initialUserState = {
   name: "",
@@ -16,6 +16,7 @@ const Login = () => {
   const [userState, setUserState] = useState(initialUserState);
 
   const { user, isLoading } = useSelector((store) => store.user);
+
   const dispatch = useDispatch();
 
   // Component functions
@@ -41,7 +42,6 @@ const Login = () => {
         theme: "light",
       });
     }
-
     isMember
       ? dispatch(loginUser({ email, password }))
       : dispatch(registerUser({ email, password, name }));
