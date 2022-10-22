@@ -1,6 +1,6 @@
-import p1 from "../../assets/images/image1.jpg";
-import p2 from "../../assets/images/image2.jpg";
-import p3 from "../../assets/images/image3.jpg";
+import p1 from "./image1.jpg";
+import p2 from "./image2.jpg";
+import p3 from "./image3.jpg";
 
 export const imagesData = [
   {

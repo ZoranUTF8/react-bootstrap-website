@@ -1,6 +1,6 @@
-import p1 from "../../assets/images/service1.jpg";
-import p2 from "../../assets/images/service2.jpg";
-import p3 from "../../assets/images/service3.jpg";
+import p1 from "./service1.jpg";
+import p2 from "./service2.jpg";
+import p3 from "./service3.jpg";
 
 const ServicesData = [
   {
