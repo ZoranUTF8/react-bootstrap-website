@@ -25,7 +25,7 @@ const Login = () => {
         navigate("/");
       }, 3000);
     }
-  }, [user, navigate]);
+  }, [user]);
 
   // Component functions
   const handleChange = (evt) => {

@@ -32,7 +32,6 @@ export const loginUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}auth/login`, user);
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg);
@@ -66,7 +65,6 @@ const userSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, { payload }) => {
       const { userName, isAdmin } = payload;
-      console.log(payload);
       state.isLoading = false;
       state.user = payload;
       state.isAdmin = isAdmin;
