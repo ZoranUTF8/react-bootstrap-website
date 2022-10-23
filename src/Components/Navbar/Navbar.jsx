@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
   // If admin logged in exists than show employees status navbar
-  // get adming from the store
-  const [admin, setAdmin] = useState(false);
+  // get admin from the store
   const { isAdmin } = useSelector((store) => store.user);
-
+  console.log(isAdmin);
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">

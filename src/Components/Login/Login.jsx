@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import loginPage from "../../assets/images/loginPage.svg";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../../features/user/userSlice";
-
+import { useNavigate } from "react-router-dom";
 const initialUserState = {
   name: "",
   email: "",
@@ -14,10 +14,18 @@ const initialUserState = {
 const Login = () => {
   // Component state
   const [userState, setUserState] = useState(initialUserState);
-
   const { user, isLoading } = useSelector((store) => store.user);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // check if user is already logged in
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   // Component functions
   const handleChange = (evt) => {
@@ -25,7 +33,7 @@ const Login = () => {
     const { name, value } = evt.target;
     setUserState({ ...userState, [name]: value });
   };
-
+  // Handle form submission
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -46,7 +54,7 @@ const Login = () => {
       ? dispatch(loginUser({ email, password }))
       : dispatch(registerUser({ email, password, name }));
   };
-
+  // Toggle member
   const toggleMember = () => {
     setUserState((prevState) => ({
       ...prevState,
@@ -111,8 +119,12 @@ const Login = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-info w-100 mb-1">
-              {userState.isMember ? "Login" : "Register"}
+            <button
+              type="submit"
+              className="btn btn-info w-100 mb-1"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Submit"}
             </button>
             <p className="text-center d-flex justify-content-center align-items-center">
               {userState.isMember ? "Not Registered ?" : "Already Registered ?"}
