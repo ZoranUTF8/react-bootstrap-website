@@ -22,7 +22,7 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       setTimeout(() => {
-        navigate("/");
+        navigate("/admin");
       }, 3000);
     }
   }, [user]);

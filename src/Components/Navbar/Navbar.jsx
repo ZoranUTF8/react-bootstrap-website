@@ -5,14 +5,16 @@ import { useSelector, useDispatch } from "react-redux";
 const Navbar = () => {
   // If admin logged in exists than show employees status navbar
   // get admin from the store
-  const isAdmin = useSelector((store) => store.user.user?.isUserAdmin);
+  const { user } = useSelector((store) => store.user);
+  console.log(user);
+  const isAdmin = user?.isUserAdmin;
 
   console.log("IS ADMIN in navbar", isAdmin);
 
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
-        <Link to={"/"} className="navbar-brand">
+        <Link to={"home"} className="navbar-brand">
           Company Name
         </Link>
 
@@ -31,7 +33,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link to="home" className="nav-link">
                 Home
               </Link>
             </li>
