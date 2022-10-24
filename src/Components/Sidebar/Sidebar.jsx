@@ -1,9 +1,42 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  return (
-    <div>Sidebar</div>
-  )
-}
+  const { sidebarOpen } = useSelector((store) => store.user);
 
-export default Sidebar
+  return (
+    <div>
+      {sidebarOpen && (
+        <aside className="sidebar navbar navbar-expand d-flex flex-column align-item-start w-100  navbar-dark bg-dark">
+          <ul className="navbar-nav d-flex flex-column w-100 ">
+            <li className="nav-item">
+              <Link to={"all-employees"} className="nav-link">
+                All employees
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"add-employees"} className="nav-link">
+                Add employee
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"profile"} className="nav-link">
+                Profile
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"admin"} className="nav-link">
+                Stats
+              </Link>
+            </li>
+          </ul>
+        </aside>
+      )}
+    </div>
+  );
+};
+
+export default Sidebar;

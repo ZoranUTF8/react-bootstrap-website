@@ -1,22 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { toggleSidebar } from "../../features/user/userSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   // If admin logged in exists than show employees status navbar
   // get admin from the store
   const { user } = useSelector((store) => store.user);
-  console.log(user);
   const isAdmin = user?.isUserAdmin;
 
-  console.log("IS ADMIN in navbar", isAdmin);
-
+  const toggleSidebarBtn = () => {
+    dispatch(toggleSidebar());
+  };
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
-        <Link to={"home"} className="navbar-brand">
-          Company Name
+        <Link to={"home"} className="navbar-brand ">
+          <h4 className="display-6">Company Name</h4>
         </Link>
+
+        {isAdmin && (
+          <button className="sidebar sidebar_button" onClick={toggleSidebarBtn}>
+            <GiHamburgerMenu size="40" />
+          </button>
+        )}
 
         <button
           className="navbar-toggler"
@@ -49,41 +58,7 @@ const Navbar = () => {
             </li>
 
             {/* ADD LINK LATER FOR CRUD OPERATIONS */}
-            {isAdmin ? (
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Employee management
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      View Employees
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Add Employees
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Remove Employees
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Update Employees
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            ) : (
+            {!user && (
               <li className="nav-item">
                 <Link to="login" className="nav-link">
                   Login

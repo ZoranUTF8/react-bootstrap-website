@@ -12,6 +12,7 @@ const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 const initialState = {
   isLoading: false,
   isAdmin: false,
+  sidebarOpen: false,
   user: getUserFromLocalStorage(),
 };
 
@@ -42,6 +43,12 @@ export const loginUser = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
+
+  reducers: {
+    toggleSidebar: (state) => {
+      state.sidebarOpen = !state.sidebarOpen;
+    },
+  },
 
   // ? once the data is fetched add it to the state
   extraReducers: {
@@ -77,5 +84,5 @@ const userSlice = createSlice({
     },
   },
 });
-
+export const { toggleSidebar } = userSlice.actions;
 export default userSlice.reducer;
