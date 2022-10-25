@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { toggleSidebar } from "../../features/user/userSlice";
+import userSlice, {
+  toggleSidebar,
+  logoutUser,
+} from "../../features/user/userSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -14,6 +17,7 @@ const Navbar = () => {
   const toggleSidebarBtn = () => {
     dispatch(toggleSidebar());
   };
+
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
@@ -56,13 +60,38 @@ const Navbar = () => {
                 Contact
               </Link>
             </li>
-
-            {/* ADD LINK LATER FOR CRUD OPERATIONS */}
             {!user && (
               <li className="nav-item">
                 <Link to="login" className="nav-link">
                   Login
                 </Link>
+              </li>
+            )}
+            {isAdmin && (
+              <li className="nav-item dropdown">
+                <p
+                  className="nav-link dropdown-toggle"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {user?.userName || "Admin"}
+                </p>
+                <ul className="dropdown-menu">
+                  <li className="nav-item">
+                    <Link to="admin" className="nav-link">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="nav-link nav-logout"
+                      onClick={() => dispatch(logoutUser())}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </li>
             )}
           </ul>

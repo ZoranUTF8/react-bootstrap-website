@@ -10,6 +10,12 @@ nav .nav-link:hover {
   font-size: 26px;
 }
 
+.nav-logout {
+  border: none;
+  background-color: transparent;
+  color: transparent;
+}
+
 /* SLIDER */
 
 .underline {
@@ -48,7 +54,6 @@ nav .nav-link:hover {
   background-color: lightgray;
   border-radius: 10px;
 }
-
 
 @media screen and (max-width: 720px) {
   .sidebar_button {

@@ -4,6 +4,7 @@ import axios from "axios";
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
+  removeUserFromLocalStorage,
 } from "../../utils/localStorageOperations";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
@@ -11,8 +12,7 @@ const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 // initialization state
 const initialState = {
   isLoading: false,
-  isAdmin: false,
-  sidebarOpen: false,
+  sidebarOpen: true,
   user: getUserFromLocalStorage(),
 };
 
@@ -47,6 +47,12 @@ const userSlice = createSlice({
   reducers: {
     toggleSidebar: (state) => {
       state.sidebarOpen = !state.sidebarOpen;
+    },
+    logoutUser: (state) => {
+      state.user = null;
+      state.sidebarOpen = false;
+      removeUserFromLocalStorage();
+      toast.success("Logged out successfully");
     },
   },
 
@@ -84,5 +90,5 @@ const userSlice = createSlice({
     },
   },
 });
-export const { toggleSidebar } = userSlice.actions;
+export const { toggleSidebar, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
