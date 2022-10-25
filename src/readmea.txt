@@ -3,4 +3,4 @@ fix:
 
 2: Check to display admin menu colapse only on admin routes
 
-3:
+3: Fix navbar links hover

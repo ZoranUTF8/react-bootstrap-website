@@ -5,5 +5,15 @@ import Vmv from "./Vmv/Vmv";
 import CompanyServices from "./CompanyServices/CompanyServices";
 import Login from "./Login/Login";
 import Sidebar from "./Sidebar/Sidebar";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
-export { Navbar, Footer, Slider, Vmv, CompanyServices, Login, Sidebar };
+export {
+  Navbar,
+  Footer,
+  Slider,
+  Vmv,
+  CompanyServices,
+  Login,
+  Sidebar,
+  ProtectedRoute,
+};

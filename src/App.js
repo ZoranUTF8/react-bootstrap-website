@@ -1,7 +1,7 @@
 import "./App.css";
 import { Home, AboutUs, ContactUs, Error, LoginPage } from "./Pages";
 import { Routes, Route } from "react-router-dom";
-import { Navbar, Footer } from "./Components";
+import { Navbar, Footer, ProtectedRoute } from "./Components";
 import { ToastContainer } from "react-toastify";
 import {
   SharedLayout,
@@ -21,7 +21,14 @@ function App() {
       {/* APP ROUTES */}
       <Routes>
         {/* Admin routes */}
-        <Route path="admin" element={<SharedLayout />}>
+        <Route
+          path="admin"
+          element={
+            <ProtectedRoute>
+              <SharedLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Stats />} />
           <Route path="all-employees" element={<AllEmployees />} />
           <Route path="add-employees" element={<AddEmployee />} />
