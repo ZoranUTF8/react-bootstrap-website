@@ -6,6 +6,15 @@ export const registerUserFunc = async (url, user, thunkApi) => {
         const response = await axios.post(`${url}auth/register`, user);
         return response.data;
       } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data.msg);
+        return thunkApi.rejectWithValue(error.response.data.msg);
+      }
+};
+
+export const loginUserFunc = async (url, user, thunkApi) => {
+    try {
+        const response = await axios.post(`${url}auth/login`, user);
+        return response.data;
+      } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data.msg);
       }
 };
