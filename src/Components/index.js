@@ -7,7 +7,7 @@ import Login from "./Login/Login";
 import Sidebar from "./Sidebar/Sidebar";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import ProfileComponent from "./Dashboard/ProfileComponent";
-
+import AddEmployee from "./Dashboard/AddEmployee";
 export {
   Navbar,
   Footer,
@@ -18,4 +18,5 @@ export {
   Sidebar,
   ProtectedRoute,
   ProfileComponent,
+  AddEmployee
 };
