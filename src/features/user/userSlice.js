@@ -6,6 +6,7 @@ import {
   addUserToLocalStorage,
   removeUserFromLocalStorage,
 } from "../../utils/localStorageOperations";
+import { registerUserFunc } from "./userFunctions";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 
@@ -19,12 +20,7 @@ const initialState = {
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (user, thunkAPI) => {
-    try {
-      const response = await axios.post(`${API_URL}auth/register`, user);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
+    return registerUserFunc(API_URL, user, thunkAPI);
   }
 );
 
