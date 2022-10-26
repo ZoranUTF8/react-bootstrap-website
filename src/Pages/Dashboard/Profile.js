@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import { ProfileComponent } from "../../Components/index";
 
 const Profile = () => {
   return (
-    <div>Profile</div>
-  )
-}
+    <div className="container">
+      <div className="row">
+        <div className="col-12 p-3">
+          <ProfileComponent />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Profile
+export default Profile;

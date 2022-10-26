@@ -11,7 +11,7 @@ const SharedLayout = () => {
         <div className="col-sm-12 col-md-3 p-0">
           <Sidebar />
         </div>
-        <div className="col-sm-12 col-md-9">
+        <div className="col-sm-12 col-md-9 p-0">
           <Outlet />
         </div>
       </div>
