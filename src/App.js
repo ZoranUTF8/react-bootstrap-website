@@ -36,7 +36,7 @@ function App() {
         </Route>
 
         {/* Admin routes */}
-        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="about" element={<AboutUs />} />
         <Route path="contact" element={<ContactUs />} />

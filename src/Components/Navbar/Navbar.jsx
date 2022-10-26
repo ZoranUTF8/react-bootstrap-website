@@ -21,12 +21,12 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
-        <Link to={"home"} className="navbar-brand ">
+        <Link to={"/"} className="navbar-brand ">
           <h4 className="display-6">Company Name</h4>
         </Link>
 
         {isAdmin && (
-          <button className="sidebar sidebar_button" onClick={toggleSidebarBtn}>
+          <button className="sidebar_button" onClick={toggleSidebarBtn}>
             <GiHamburgerMenu size="40" />
           </button>
         )}
@@ -46,7 +46,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="home" className="nav-link">
+              <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>

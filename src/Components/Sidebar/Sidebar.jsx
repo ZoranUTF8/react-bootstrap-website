@@ -5,9 +5,9 @@ const Sidebar = () => {
   const { sidebarOpen } = useSelector((store) => store.user);
 
   return (
-    <div>
+    <div className="sidebar-container">
       {sidebarOpen && (
-        <aside className="sidebar navbar navbar-expand d-flex flex-column align-item-start w-100  navbar-dark bg-dark">
+        <aside className="sidebar navbar navbar-expand d-flex flex-column align-item-start navbar-light bg-light">
           <ul className="navbar-nav d-flex flex-column w-100 ">
             <li className="nav-item">
               <Link to={"all-employees"} className="nav-link">
@@ -28,7 +28,7 @@ const Sidebar = () => {
             </li>
 
             <li className="nav-item">
-              <Link to={"admin"} className="nav-link">
+              <Link to={""} className="nav-link">
                 Stats
               </Link>
             </li>

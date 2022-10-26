@@ -33,6 +33,11 @@ nav .nav-link:hover {
 
 .sidebar {
   transition: 0.4s;
+  height: 100%;
+  text-align: left;
+}
+.sidebar-container {
+  height: 100%;
 }
 
 .sidebar .nav-link {

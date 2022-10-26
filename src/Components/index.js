@@ -6,6 +6,7 @@ import CompanyServices from "./CompanyServices/CompanyServices";
 import Login from "./Login/Login";
 import Sidebar from "./Sidebar/Sidebar";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import ProfileComponent from "./Dashboard/ProfileComponent";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   Login,
   Sidebar,
   ProtectedRoute,
+  ProfileComponent,
 };
