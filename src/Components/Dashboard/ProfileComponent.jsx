@@ -22,7 +22,7 @@ const ProfileComponent = () => {
 
   return (
     <form
-      className="p-3 d-flex flex-column justify-content-center"
+      className="p-3 d-flex flex-column justify-content-center fullPage"
       onSubmit={handleSubmit}
     >
       <div className="row g-3 d-flex flex-row justify-content-center">
