@@ -1,63 +1,148 @@
-import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import {
+  handleFormChange,
+  clearFormValues,
+} from "../../features/employee/employeeSlice";
+import { createEmployee } from "../../features/employee/employeeSlice";
 
 const AddEmployee = () => {
+  const dispatch = useDispatch();
+
+  const {
+    isLoading,
+    firstName,
+    lastName,
+    age,
+    salary,
+    address,
+    position,
+    department,
+    educationOptions,
+    education,
+    statusOptions,
+    status,
+    isEditing,
+    editEmployeeId,
+  } = useSelector((store) => store.employee);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (
+      !firstName ||
+      !lastName ||
+      !age ||
+      !salary ||
+      !address ||
+      !position ||
+      !department ||
+      !education ||
+      !status
+    ) {
+      toast.error("Please check your input");
+    } else {
+
+      dispatch(
+        createEmployee({
+          firstName,
+          lastName,
+          age,
+          salary,
+          address,
+          position,
+          department,
+          education,
+          status,
+        })
+      );
+    }
+  }
+
+  function handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    dispatch(handleFormChange({ name, value }));
+  }
+
   return (
     <div className="container fullPage">
-      <form className="p-3">
+      <form className="p-3" onSubmit={handleSubmit}>
+        <h3 className="display-5">
+          {isEditing ? "Edit employee" : "Add employee"}
+        </h3>
+
         <div className="row mb-3">
           <div className="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="firstname">Firstname</label>
+            <div className="form-group">
+              <label htmlFor="firstname">Firstname</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="firstname"
                 aria-describedby="firstnameHelp"
                 placeholder="Firstname"
+                value={firstName}
+                onChange={handleChange}
+                name="firstName"
               />
             </div>
           </div>
           <div className="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="lastname">Lastname</label>
+            <div className="form-group">
+              <label htmlFor="lastname">Lastname</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="lastname"
                 aria-describedby="lastname"
                 placeholder="Lastname"
+                value={lastName}
+                onChange={handleChange}
+                name="lastName"
               />
             </div>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <div class="form-group">
-              <label for="firstname">Age</label>
+            <div className="form-group">
+              <label htmlFor="firstname">Age</label>
               <input
                 type="number"
-                class="form-control"
+                className="form-control"
                 id="age"
                 placeholder="Age"
+                value={age}
+                onChange={handleChange}
+                name="age"
               />
             </div>
           </div>
           <div className="col-4">
-            <div class="form-group">
-              <label for="salary">Salary</label>
+            <div className="form-group">
+              <label htmlFor="salary">Salary</label>
               <input
                 type="number"
-                class="form-control"
+                className="form-control"
                 id="salary"
                 placeholder="Salary"
+                value={salary}
+                onChange={handleChange}
+                name="salary"
               />
             </div>
           </div>
           <div className="col-4">
-            <div class="form-group">
-              <label for="inputState">Education</label>
-              <select id="inputState" class="form-control">
-                <option selected>High school</option>
+            <div className="form-group">
+              <label htmlFor="inputState">Education</label>
+              <select
+                id="inputState"
+                className="form-control"
+                value={education}
+                onChange={handleChange}
+                name="education"
+              >
+                <option defaultValue>High school</option>
                 <option>Associate</option>
                 <option>Bachelor’s</option>
                 <option>Master’s</option>
@@ -68,61 +153,84 @@ const AddEmployee = () => {
         </div>
         <div className="row mb-3">
           <div className="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="address">Address</label>
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="address"
                 placeholder="Address"
+                value={address}
+                onChange={handleChange}
+                name="address"
               />
             </div>
           </div>
           <div className="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="Position">Position</label>
+            <div className="form-group">
+              <label htmlFor="Position">Position</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="position"
                 aria-describedby="position"
                 placeholder="Position"
+                value={position}
+                onChange={handleChange}
+                name="position"
               />
             </div>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="department ">Department</label>
+            <div className="form-group">
+              <label htmlFor="department ">Department</label>
               <input
                 type="text"
-                class="form-control"
-                id="department "
-                placeholder="Department "
+                className="form-control"
+                id="department"
+                placeholder="Department"
+                value={department}
+                onChange={handleChange}
+                name="department"
               />
             </div>
           </div>
           <div className="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="inputState">Status</label>
-              <select id="inputState" class="form-control">
-                <option selected>Employed</option>
-                <option>Not employed</option>
-                <option>Suspended</option>
-                <option>Sick leave</option>
+            <div className="form-group">
+              <label htmlFor="inputState">Status</label>
+              <select
+                id="inputState"
+                className="form-control"
+                value={status}
+                onChange={handleChange}
+                name="status"
+              >
+                <option defaultValue>employed</option>
+                <option>not employed</option>
+                <option>suspended</option>
+                <option>sick leave</option>
               </select>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-sm-12 col-md-6 mb-2">
-            <button type="submit" class="btn btn-primary w-100">
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              disabled={isLoading}
+            >
               Add
             </button>
           </div>
           <div className="col-sm-12 col-md-6">
-            <button type="submit" class="btn btn-primary w-100">
+            <button
+              type="button"
+              className="btn btn-primary w-100"
+              onClick={() => dispatch(clearFormValues())}
+            >
               Clear
             </button>
           </div>
