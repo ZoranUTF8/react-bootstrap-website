@@ -39,11 +39,13 @@ const userSlice = createSlice({
     toggleSidebar: (state) => {
       state.sidebarOpen = !state.sidebarOpen;
     },
-    logoutUser: (state) => {
+    logoutUser: (state, { payload }) => {
       state.user = null;
       state.sidebarOpen = false;
       removeUserFromLocalStorage();
-      toast.success("Logged out successfully");
+      if (payload) {
+        toast.success(payload);
+      }
     },
   },
 
