@@ -86,7 +86,7 @@ const Navbar = () => {
                   <li className="nav-item">
                     <button
                       className="nav-link nav-logout"
-                      onClick={() => dispatch(logoutUser())}
+                      onClick={() => dispatch(logoutUser("Loging you out..."))}
                     >
                       Logout
                     </button>
