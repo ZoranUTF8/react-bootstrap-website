@@ -1,9 +1,7 @@
-import React from 'react'
+import { AllEmployees as AllEmployeesComponent } from "../../Components";
 
 const AllEmployees = () => {
-  return (
-    <div>AllEmployees</div>
-  )
-}
+  return <AllEmployeesComponent />;
+};
 
-export default AllEmployees
+export default AllEmployees;

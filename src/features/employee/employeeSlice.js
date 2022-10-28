@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { getUserFromLocalStorage } from "../../utils/localStorageOperations";
-import { logoutUser } from "../user/userSlice";
-const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
+import { createNewEmployee } from "./employeeFunctions";
+import { showLoading, hideLoading } from "../allEmployees/allEmployeesSlice";
 
+const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 const initialState = {
   isLoading: false,
   firstName: "",
@@ -31,31 +30,11 @@ const initialState = {
 export const createEmployee = createAsyncThunk(
   "employee/createEmployee",
   async (employee, thunkAPI) => {
-    try {
-
-      const response = await axios.post(`${API_URL}employees`, employee, {
-        headers: {
-          authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-        },
-      });
-
-
-      thunkAPI.dispatch(clearFormValues());
-
-      return response.data;
-      
-    } catch (error) {
-      // if authentication not valid logout useFr
-      if (error.response.status === 401) {
-        thunkAPI.dispatch(logoutUser());
-        return thunkAPI.rejectWithValue("Unauthorized, login out...");
-      }
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
+    return createNewEmployee(API_URL, employee, thunkAPI);
   }
 );
 
-const employyeSlice = createSlice({
+const employeeSlice = createSlice({
   name: "employee",
   initialState,
 
@@ -82,5 +61,5 @@ const employyeSlice = createSlice({
   },
 });
 
-export const { handleFormChange, clearFormValues } = employyeSlice.actions;
-export default employyeSlice.reducer;
+export const { handleFormChange, clearFormValues } = employeeSlice.actions;
+export default employeeSlice.reducer;

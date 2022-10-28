@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <section className="footer bg-dark text-white p-4 text-center mt-5">
+    <section className="footer bg-dark text-white p-4 text-center">
       <div className="container">
         <div className="row">
           <div className="col-md-4">
