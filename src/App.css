@@ -2,6 +2,9 @@
 .fullPage {
   min-height: 80vh;
 }
+.full-height-element {
+  min-height: 100%;
+}
 /* NAVBAR */
 nav .nav-link:hover {
   color: #282c34;
@@ -37,6 +40,7 @@ nav .nav-link:hover {
 
 .sidebar {
   transition: 0.4s;
+  color: red;
   height: 100%;
   text-align: left;
 }

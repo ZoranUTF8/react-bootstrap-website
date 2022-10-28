@@ -41,7 +41,6 @@ const AddEmployee = () => {
     ) {
       toast.error("Please check your input");
     } else {
-
       dispatch(
         createEmployee({
           firstName,
@@ -222,13 +221,13 @@ const AddEmployee = () => {
               className="btn btn-primary w-100"
               disabled={isLoading}
             >
-              Add
+              {isLoading ? "Loading..." : "Add"}
             </button>
           </div>
           <div className="col-sm-12 col-md-6">
             <button
               type="button"
-              className="btn btn-primary w-100"
+              className="btn btn-secondary w-100"
               onClick={() => dispatch(clearFormValues())}
             >
               Clear
