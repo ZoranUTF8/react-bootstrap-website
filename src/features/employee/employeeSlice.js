@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createNewEmployee } from "./employeeFunctions";
+import { createNewEmployee, updateExistingEmployee } from "./employeeFunctions";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 const initialState = {
@@ -33,6 +33,13 @@ export const createEmployee = createAsyncThunk(
   }
 );
 
+export const updateEmployee = createAsyncThunk(
+  "employee/updateEmployee",
+  async (employee, thunkAPI) => {
+    return updateExistingEmployee(API_URL, employee, thunkAPI);
+  }
+);
+
 const employeeSlice = createSlice({
   name: "employee",
   initialState,
@@ -45,7 +52,6 @@ const employeeSlice = createSlice({
       return initialState;
     },
     setEditEmployee: (state, { payload }) => {
-      console.log(payload);
       return { ...state, isEditing: true, ...payload };
     },
   },
@@ -58,6 +64,17 @@ const employeeSlice = createSlice({
       toast.success("Employee has been created.");
     },
     [createEmployee.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [updateEmployee.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateEmployee.fulfilled]: (state) => {
+      state.isLoading = false;
+      toast.success("Employee has been updated.");
+    },
+    [updateEmployee.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },

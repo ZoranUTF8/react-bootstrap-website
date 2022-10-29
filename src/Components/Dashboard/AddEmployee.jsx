@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import {
   handleFormChange,
   clearFormValues,
-  setEditEmployee,
+  updateEmployee,
+  createEmployee,
 } from "../../features/employee/employeeSlice";
-import { createEmployee } from "../../features/employee/employeeSlice";
 
 const AddEmployee = () => {
   const dispatch = useDispatch();
@@ -41,9 +41,12 @@ const AddEmployee = () => {
       !status
     ) {
       toast.error("Please check your input");
-    } else {
+      return;
+    }
+
+    if (isEditing) {
       dispatch(
-        createEmployee({
+        updateEmployee({
           firstName,
           lastName,
           age,
@@ -55,7 +58,22 @@ const AddEmployee = () => {
           status,
         })
       );
+      return;
     }
+
+    dispatch(
+      createEmployee({
+        firstName,
+        lastName,
+        age,
+        salary,
+        address,
+        position,
+        department,
+        education,
+        status,
+      })
+    );
   }
 
   function handleChange(e) {
@@ -222,7 +240,9 @@ const AddEmployee = () => {
               className="btn btn-primary w-100"
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : "Add"}
+              {isEditing && "Update"}
+              {isLoading && !isEditing && "Loading..."}
+              {!isLoading && !isEditing && "Add"}
             </button>
           </div>
           <div className="col-sm-12 col-md-6">
