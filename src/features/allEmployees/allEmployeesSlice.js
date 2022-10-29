@@ -55,5 +55,4 @@ const allEmployeesSlice = createSlice({
   },
 });
 
-export const { showLoading, hideLoading } = allEmployeesSlice.actions;
 export default allEmployeesSlice.reducer;

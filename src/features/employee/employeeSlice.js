@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { createNewEmployee } from "./employeeFunctions";
-import { showLoading, hideLoading } from "../allEmployees/allEmployeesSlice";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 const initialState = {
@@ -45,6 +44,10 @@ const employeeSlice = createSlice({
     clearFormValues: () => {
       return initialState;
     },
+    setEditEmployee: (state, { payload }) => {
+      console.log(payload);
+      return { ...state, isEditing: true, ...payload };
+    },
   },
   extraReducers: {
     [createEmployee.pending]: (state) => {
@@ -61,5 +64,6 @@ const employeeSlice = createSlice({
   },
 });
 
-export const { handleFormChange, clearFormValues } = employeeSlice.actions;
+export const { handleFormChange, clearFormValues, setEditEmployee } =
+  employeeSlice.actions;
 export default employeeSlice.reducer;

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getEmployees,
   deleteEmployee,
 } from "../../features/allEmployees/allEmployeesSlice";
+import { setEditEmployee } from "../../features/employee/employeeSlice";
 
 import moment from "moment";
 
@@ -84,12 +86,29 @@ const AllEmployees = () => {
                   >
                     Delete
                   </button>
-                  <button
+                  <Link
                     className="btn btn-primary"
                     style={{ width: "80px", opacity: "90%" }}
+                    to={"/admin/add-employees"}
+                    onClick={() =>
+                      dispatch(
+                        setEditEmployee({
+                          editEmployeeId: user._id,
+                          firstName: user.firstName,
+                          lastName: user.lastName,
+                          age: user.age,
+                          salary: user.salary,
+                          address: user.address,
+                          position: user.position,
+                          department: user.department,
+                          education: user.education,
+                          status: user.status,
+                        })
+                      )
+                    }
                   >
                     Edit
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))}
