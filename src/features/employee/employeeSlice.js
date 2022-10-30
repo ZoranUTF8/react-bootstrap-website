@@ -54,6 +54,9 @@ const employeeSlice = createSlice({
     setEditEmployee: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
     },
+    viewEmployee: (state, { payload }) => {
+      return { ...state, ...payload };
+    },
   },
   extraReducers: {
     [createEmployee.pending]: (state) => {
@@ -81,6 +84,10 @@ const employeeSlice = createSlice({
   },
 });
 
-export const { handleFormChange, clearFormValues, setEditEmployee } =
-  employeeSlice.actions;
+export const {
+  handleFormChange,
+  clearFormValues,
+  setEditEmployee,
+  viewEmployee,
+} = employeeSlice.actions;
 export default employeeSlice.reducer;

@@ -5,7 +5,10 @@ import {
   getEmployees,
   deleteEmployee,
 } from "../../features/allEmployees/allEmployeesSlice";
-import { setEditEmployee } from "../../features/employee/employeeSlice";
+import {
+  setEditEmployee,
+  viewEmployee,
+} from "../../features/employee/employeeSlice";
 
 import moment from "moment";
 
@@ -45,7 +48,7 @@ const AllEmployees = () => {
     <div className="container p-3 fullPage">
       <div class="table-responsive">
         <table className="table table-bordered table-hover">
-          <thead className="thead-dark">
+          <thead className="table-secondary">
             <tr>
               <th scope="col">Firstname</th>
               <th scope="col">Lastname</th>
@@ -76,8 +79,8 @@ const AllEmployees = () => {
                 <td>{user.status}</td>
                 <td>{user.addedByName}</td>
 
-                <td>{moment(user.createdAt, "YYYYMMDD").fromNow()}</td>
-                <td>{moment(user.updatedAt, "YYYYMMDD").fromNow()}</td>
+                <td>{moment(user.createdAt).format("ll")}</td>
+                <td>{moment(user.updatedAt).format("ll")}</td>
                 <td className="float-right">
                   <button
                     className="btn btn-danger mb-1"
@@ -108,6 +111,29 @@ const AllEmployees = () => {
                     }
                   >
                     Edit
+                  </Link>
+
+                  <Link
+                    className="btn btn-primary"
+                    style={{ width: "80px", opacity: "90%" }}
+                    to={"/admin/view-employee"}
+                    onClick={() =>
+                      dispatch(
+                        viewEmployee({
+                          firstName: user.firstName,
+                          lastName: user.lastName,
+                          age: user.age,
+                          salary: user.salary,
+                          address: user.address,
+                          position: user.position,
+                          department: user.department,
+                          education: user.education,
+                          status: user.status,
+                        })
+                      )
+                    }
+                  >
+                    View
                   </Link>
                 </td>
               </tr>

@@ -6,10 +6,14 @@
   min-height: 100%;
 }
 /* NAVBAR */
+nav .nav-link {
+  font-size: 1.2rem;
+  transition: 0.7s;
+}
 nav .nav-link:hover {
   color: #282c34;
   text-decoration: underline;
-  transition: 0.4s;
+  transition-timing-function: ease;
 }
 
 .main-heading {
@@ -39,8 +43,6 @@ nav .nav-link:hover {
 /* SIDEBAR */
 
 .sidebar {
-  transition: 0.4s;
-  color: red;
   height: 100%;
   text-align: left;
 }
@@ -49,13 +51,12 @@ nav .nav-link:hover {
 }
 
 .sidebar .nav-link {
-  font-size: 1.25rem;
+  transition: 0.7s;
+  font-size: 1.2rem;
 }
-
-.sidebar .nav-link:active,
-.nav-link:focus,
-.nav-link:hover {
-  font-size: 1.5rem;
+.sidebar .nav-link:hover {
+  font-size: 1.3rem;
+  transition-timing-function: ease;
 }
 
 .sidebar_button {

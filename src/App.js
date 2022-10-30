@@ -9,6 +9,7 @@ import {
   AllEmployees,
   Profile,
   Stats,
+  ViewEmployee,
 } from "./Pages/Dashboard";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -32,6 +33,7 @@ function App() {
           <Route index element={<Stats />} />
           <Route path="all-employees" element={<AllEmployees />} />
           <Route path="add-employees" element={<AddEmployee />} />
+          <Route path="view-employee" element={<ViewEmployee />} />
           <Route path="profile" element={<Profile />} />
         </Route>
 
