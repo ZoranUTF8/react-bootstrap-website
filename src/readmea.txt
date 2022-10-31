@@ -8,5 +8,3 @@ fix:
 4: Fix sidebar logic
 
 5: Is it better to have more slices for like an action where we get all emplyees
-
-6: Addf updated at to the API for when the employyee is updated

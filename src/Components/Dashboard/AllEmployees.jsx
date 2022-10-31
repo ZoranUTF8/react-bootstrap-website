@@ -45,7 +45,8 @@ const AllEmployees = () => {
   }
 
   return (
-    <div className="container p-3 fullPage">
+    <div className="container p-3 fullPage d-flex flex-column">
+      <h3 className="display-5 align-self-center">All employees</h3>
       <div class="table-responsive">
         <table className="table table-bordered table-hover">
           <thead className="table-secondary">
@@ -67,7 +68,7 @@ const AllEmployees = () => {
           </thead>
           <tbody>
             {allEmployees?.map((user) => (
-              <tr key={user._id}>
+              <tr key={user._id} className="table-container ">
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.age}</td>
@@ -81,17 +82,16 @@ const AllEmployees = () => {
 
                 <td>{moment(user.createdAt).format("ll")}</td>
                 <td>{moment(user.updatedAt).format("ll")}</td>
-                <td className="float-right">
+                <td className="table-action-button-container d-flex align-items-center justify-content-center">
+                
                   <button
-                    className="btn btn-danger mb-1"
-                    style={{ width: "80px", opacity: "90%" }}
+                    className="btn btn-danger table-action-button"
                     onClick={() => dispatch(deleteEmployee(user._id))}
                   >
                     Delete
                   </button>
                   <Link
-                    className="btn btn-primary"
-                    style={{ width: "80px", opacity: "90%" }}
+                    className="btn btn-primary table-action-button"
                     to={"/admin/add-employees"}
                     onClick={() =>
                       dispatch(
@@ -114,8 +114,7 @@ const AllEmployees = () => {
                   </Link>
 
                   <Link
-                    className="btn btn-primary"
-                    style={{ width: "80px", opacity: "90%" }}
+                    className="btn btn-primary table-action-button bg-success"
                     to={"/admin/view-employee"}
                     onClick={() =>
                       dispatch(

@@ -85,3 +85,18 @@ nav .nav-link:hover {
   color: gray;
   text-decoration: underline;
 }
+
+/* TABLE */
+.table-container {
+  min-height: 100%;
+}
+.table-action-button-container {
+  height: 100px !important;
+}
+
+.table-action-button {
+  padding: 5px !important;
+  width: 70px !important;
+  opacity: 90% !important;
+  margin-right: 5px;
+}
