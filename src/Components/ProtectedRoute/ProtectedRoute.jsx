@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((store) => store.user);
-  console.log("INSIDE PROTECTED ROUTE", user);
+  
   if (!user) {
     return <Navigate to={"/login"} />;
   }

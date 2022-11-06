@@ -25,7 +25,7 @@ const ProfileComponent = () => {
     >
       <div className="row g-3 d-flex flex-row justify-content-center">
         <div className="mb-3 col-md-6">
-          <label for="username" className="form-label">
+          <label htmlFor="username" className="form-label">
             Username
           </label>
           <input

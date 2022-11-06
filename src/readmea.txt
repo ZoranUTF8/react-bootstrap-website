@@ -1,7 +1,9 @@
 fix:
 
 
-1.4 Add stats page
+1.4 Add stats page - in proggress
+
+3: Make a separate Loading component 
 
 2: Check to display admin menu collapse only on admin routes
 
