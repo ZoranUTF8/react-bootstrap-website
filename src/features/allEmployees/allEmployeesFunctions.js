@@ -1,13 +1,11 @@
 import axios from "axios";
-import { hideLoading, showLoading } from "./allEmployeesSlice";
-
+import { authHeader } from "../../utils/authHeaders";
 export const getAllEmployees = async (API_URL, thunkAPI) => {
   try {
-    const response = await axios.get(`${API_URL}employees`, {
-      headers: {
-        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-      },
-    });
+    const response = await axios.get(
+      `${API_URL}employees`,
+      authHeader(thunkAPI)
+    );
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
@@ -16,11 +14,10 @@ export const getAllEmployees = async (API_URL, thunkAPI) => {
 
 export const deleteSingleEmployee = async (API_URL, employeeId, thunkAPI) => {
   try {
-    const response = await axios.delete(`${API_URL}employees/${employeeId}`, {
-      headers: {
-        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-      },
-    });
+    const response = await axios.delete(
+      `${API_URL}employees/${employeeId}`,
+      authHeader(thunkAPI)
+    );
 
     return response.data;
   } catch (error) {

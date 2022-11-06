@@ -8,10 +8,10 @@ const SharedLayout = () => {
   return (
     <main className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-3 p-0">
+        <div className="col-sm-12 col-md-2 p-0">
           <Sidebar />
         </div>
-        <div className="col-sm-12 col-md-9 p-0">
+        <div className="col-sm-12 col-md-10 p-0">
           <Outlet />
         </div>
       </div>

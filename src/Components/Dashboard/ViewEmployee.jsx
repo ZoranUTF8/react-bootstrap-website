@@ -1,17 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import {
-  handleFormChange,
-  clearFormValues,
-  updateEmployee,
-  createEmployee,
-} from "../../features/employee/employeeSlice";
 
-const AddEmployee = () => {
-  const dispatch = useDispatch();
-
+const ViewEmployee = () => {
   const {
-    isLoading,
     firstName,
     lastName,
     age,
@@ -19,77 +9,16 @@ const AddEmployee = () => {
     address,
     position,
     department,
-    educationOptions,
     education,
-    statusOptions,
     status,
-    isEditing,
-    editEmployeeId,
   } = useSelector((store) => store.employee);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (
-      !firstName ||
-      !lastName ||
-      !age ||
-      !salary ||
-      !address ||
-      !position ||
-      !department ||
-      !education ||
-      !status
-    ) {
-      toast.error("Please check your input");
-      return;
-    }
-
-    if (isEditing) {
-      dispatch(
-        updateEmployee({
-          firstName,
-          lastName,
-          age,
-          salary,
-          address,
-          position,
-          department,
-          education,
-          status,
-        })
-      );
-      return;
-    }
-
-    dispatch(
-      createEmployee({
-        firstName,
-        lastName,
-        age,
-        salary,
-        address,
-        position,
-        department,
-        education,
-        status,
-      })
-    );
-  }
-
-  function handleChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    dispatch(handleFormChange({ name, value }));
-  }
-
   return (
-    <div className="container fullPage">
-      <form className="p-3" onSubmit={handleSubmit}>
-        <h3 className="display-5">
-          {isEditing ? "Edit employee" : "Add employee"}
-        </h3>
+    <div className="fullPage ">
+      <div className="container row p-3">
+        <h3 className="display-5">Employee details</h3>
 
-        <div className="row mb-3">
+        <div className="row mb-2">
           <div className="col-sm-12 col-md-6">
             <div className="form-group">
               <label htmlFor="firstname">Firstname</label>
@@ -100,8 +29,8 @@ const AddEmployee = () => {
                 aria-describedby="firstnameHelp"
                 placeholder="Firstname"
                 value={firstName}
-                onChange={handleChange}
                 name="firstName"
+                readOnly
               />
             </div>
           </div>
@@ -115,24 +44,24 @@ const AddEmployee = () => {
                 aria-describedby="lastname"
                 placeholder="Lastname"
                 value={lastName}
-                onChange={handleChange}
                 name="lastName"
+                readOnly
               />
             </div>
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-2">
           <div className="col-4">
             <div className="form-group">
-              <label htmlFor="firstname">Age</label>
+              <label htmlFor="age">Age</label>
               <input
                 type="number"
                 className="form-control"
                 id="age"
                 placeholder="Age"
                 value={age}
-                onChange={handleChange}
                 name="age"
+                readOnly
               />
             </div>
           </div>
@@ -145,31 +74,29 @@ const AddEmployee = () => {
                 id="salary"
                 placeholder="Salary"
                 value={salary}
-                onChange={handleChange}
                 name="salary"
+                readOnly
               />
             </div>
           </div>
           <div className="col-4">
             <div className="form-group">
-              <label htmlFor="inputState">Education</label>
-              <select
-                id="inputState"
+              <label htmlFor="education">Education</label>
+              <input
+                type="text"
                 className="form-control"
+                id="education"
+                aria-describedby="education"
+                placeholder="Education"
                 value={education}
-                onChange={handleChange}
                 name="education"
-              >
-                <option defaultValue>High school</option>
-                <option>Associate</option>
-                <option>Bachelors</option>
-                <option>Masters</option>
-                <option>Doctoral</option>
-              </select>
+                readOnly
+              />
             </div>
           </div>
         </div>
-        <div className="row mb-3">
+
+        <div className="row mb-2">
           <div className="col-sm-12 col-md-6">
             <div className="form-group">
               <label htmlFor="address">Address</label>
@@ -179,8 +106,8 @@ const AddEmployee = () => {
                 id="address"
                 placeholder="Address"
                 value={address}
-                onChange={handleChange}
                 name="address"
+                readOnly
               />
             </div>
           </div>
@@ -194,13 +121,13 @@ const AddEmployee = () => {
                 aria-describedby="position"
                 placeholder="Position"
                 value={position}
-                onChange={handleChange}
                 name="position"
+                readOnly
               />
             </div>
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-2">
           <div className="col-sm-12 col-md-6">
             <div className="form-group">
               <label htmlFor="department ">Department</label>
@@ -210,54 +137,30 @@ const AddEmployee = () => {
                 id="department"
                 placeholder="Department"
                 value={department}
-                onChange={handleChange}
                 name="department"
+                readOnly
               />
             </div>
           </div>
           <div className="col-sm-12 col-md-6">
             <div className="form-group">
-              <label htmlFor="inputState">Status</label>
-              <select
-                id="inputState"
+              <label htmlFor="status">Status</label>
+              <input
+                type="text"
                 className="form-control"
+                id="status"
+                aria-describedby="status"
+                placeholder="Status"
                 value={status}
-                onChange={handleChange}
                 name="status"
-              >
-                <option defaultValue>employed</option>
-                <option>not-employed</option>
-                <option>suspended</option>
-                <option>sick-leave</option>
-              </select>
+                readOnly
+              />
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-12 col-md-6 mb-2">
-            <button
-              type="submit"
-              className="btn btn-primary w-100"
-              disabled={isLoading}
-            >
-              {isEditing && "Update"}
-              {isLoading && !isEditing && "Loading..."}
-              {!isLoading && !isEditing && "Add"}
-            </button>
-          </div>
-          <div className="col-sm-12 col-md-6">
-            <button
-              type="button"
-              className="btn btn-secondary w-100"
-              onClick={() => dispatch(clearFormValues())}
-            >
-              Clear
-            </button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default AddEmployee;
+export default ViewEmployee;

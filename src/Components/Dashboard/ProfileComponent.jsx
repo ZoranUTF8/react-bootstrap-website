@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const ProfileComponent = () => {
   const { isLoading, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  
   const [userData, setUserData] = useState({
     userName: user?.userName || "",
   });
@@ -12,10 +13,7 @@ const ProfileComponent = () => {
   // add logic for deleting adn updating a user
   function handleSubmit(e) {
     e.preventDefault();
-    if (!userData.userName) {
-      toast.error("Check your input");
-      return;
-    }
+   
 
     console.log("ola");
   }

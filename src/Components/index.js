@@ -9,6 +9,7 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import ProfileComponent from "./Dashboard/ProfileComponent";
 import AddEmployee from "./Dashboard/AddEmployee";
 import AllEmployees from "./Dashboard/AllEmployees";
+import ViewEmployee from "./Dashboard/ViewEmployee";
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   ProfileComponent,
   AddEmployee,
   AllEmployees,
+  ViewEmployee,
 };
