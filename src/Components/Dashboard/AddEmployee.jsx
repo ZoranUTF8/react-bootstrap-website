@@ -162,8 +162,8 @@ const AddEmployee = () => {
               >
                 <option defaultValue>High school</option>
                 <option>Associate</option>
-                <option>Bachelor’s</option>
-                <option>Master’s</option>
+                <option>Bachelors</option>
+                <option>Masters</option>
                 <option>Doctoral</option>
               </select>
             </div>
@@ -226,9 +226,9 @@ const AddEmployee = () => {
                 name="status"
               >
                 <option defaultValue>employed</option>
-                <option>not employed</option>
+                <option>not-employed</option>
                 <option>suspended</option>
-                <option>sick leave</option>
+                <option>sick-leave</option>
               </select>
             </div>
           </div>

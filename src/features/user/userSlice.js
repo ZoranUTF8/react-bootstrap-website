@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import axios from "axios";
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
@@ -14,6 +13,7 @@ const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 const initialState = {
   isLoading: false,
   sidebarOpen: true,
+  isAdmin: false,
   user: getUserFromLocalStorage(),
 };
 
@@ -55,11 +55,15 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [registerUser.fulfilled]: (state, { payload }) => {
-      const { userName, isAdmin } = payload;
+      const { userName, isAdmin, token } = payload;
+      //! CHECK IF ADMIN IS SENT
+      console.log("PAYLOAD", payload);
+      
       state.isLoading = false;
       state.user = payload;
       state.isAdmin = isAdmin;
-      addUserToLocalStorage(payload);
+
+      addUserToLocalStorage({ userName, token });
       toast.success(`Hello there ${userName}`);
     },
     [registerUser.rejected]: (state, { payload }) => {

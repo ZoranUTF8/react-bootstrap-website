@@ -20,7 +20,7 @@ const initialState = {
     "Doctoral",
   ],
   education: "High school",
-  statusOptions: ["employed", "not employed", "suspended", "sick leave"],
+  statusOptions: ["employed", "not-employed", "suspended", "sick-leave"],
   status: "employed",
   isEditing: false,
   editEmployeeId: "",
