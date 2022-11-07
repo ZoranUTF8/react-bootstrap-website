@@ -12,7 +12,9 @@ const Navbar = () => {
   // If admin logged in exists than show employees status navbar
   // get admin from the store
   const { user } = useSelector((store) => store.user);
-  const isAdmin = user?.isUserAdmin;
+
+  const isAdmin = user?.isAdmin;
+  console.log(user);
 
   const toggleSidebarBtn = () => {
     dispatch(toggleSidebar());
