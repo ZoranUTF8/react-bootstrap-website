@@ -14,7 +14,6 @@ const Navbar = () => {
   const { user } = useSelector((store) => store.user);
 
   const isAdmin = user?.isAdmin;
-  console.log(user);
 
   const toggleSidebarBtn = () => {
     dispatch(toggleSidebar());

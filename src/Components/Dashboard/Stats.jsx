@@ -25,10 +25,11 @@ const Stats = () => {
     );
   } else {
     return (
-      <div className=" container fullPage ">
-        <h1>Statistics</h1>
+      <div className="container fullPage ">
+        <h1 className="display-4">Stats</h1>
         <DefaultStatsContainer />
         {monthlyApplication.length > 0 && <ChartsContainers />}
+       
       </div>
     );
   }
