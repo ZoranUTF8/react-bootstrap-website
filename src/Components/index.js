@@ -10,7 +10,7 @@ import ProfileComponent from "./Dashboard/ProfileComponent";
 import AddEmployee from "./Dashboard/AddEmployee";
 import AllEmployees from "./Dashboard/AllEmployees";
 import ViewEmployee from "./Dashboard/ViewEmployee";
-
+import Stats from "./Dashboard/Stats";
 export {
   Navbar,
   Footer,
@@ -24,4 +24,5 @@ export {
   AddEmployee,
   AllEmployees,
   ViewEmployee,
+  Stats
 };

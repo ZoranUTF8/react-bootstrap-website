@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getAllEmployees, deleteSingleEmployee } from "./allEmployeesFunctions";
+import {
+  getAllEmployees,
+  deleteSingleEmployee,
+  getDefaultEmployeesStats,
+} from "./allEmployeesFunctions";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 
@@ -8,6 +12,9 @@ const initialState = {
   isDeleting: false,
   isGettingEmployees: false,
   allEmployees: [],
+  defaultStats: [],
+  monthlyApplication: [],
+  isGettingDefaultStats: false,
 };
 
 export const getEmployees = createAsyncThunk(
@@ -24,6 +31,12 @@ export const deleteEmployee = createAsyncThunk(
   }
 );
 
+export const getDefaultStats = createAsyncThunk(
+  "employee/getDefaultStats",
+  async (_, thunkAPI) => {
+    return getDefaultEmployeesStats(API_URL, thunkAPI);
+  }
+);
 const allEmployeesSlice = createSlice({
   name: "allEmployees",
   initialState,
@@ -50,6 +63,21 @@ const allEmployeesSlice = createSlice({
     },
     [deleteEmployee.rejected]: (state, { payload }) => {
       state.isDeleting = false;
+      toast.error(payload);
+    },
+    [getDefaultStats.pending]: (state) => {
+      state.isGettingDefaultStats = true;
+    },
+    [getDefaultStats.fulfilled]: (
+      state,
+      { payload: { employeesStats, monthlyApplication } }
+    ) => {
+      state.isGettingDefaultStats = false;
+      state.defaultStats = employeesStats;
+      state.monthlyApplication = monthlyApplication;
+    },
+    [getDefaultStats.rejected]: (state, { payload }) => {
+      state.isGettingDefaultStats = false;
       toast.error(payload);
     },
   },

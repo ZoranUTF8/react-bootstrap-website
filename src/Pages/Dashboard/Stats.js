@@ -1,9 +1,11 @@
-import React from 'react'
+import { Stats as StatsComponent } from "../../Components";
 
 const Stats = () => {
   return (
-    <div>Stats</div>
-  )
-}
+    <div className="fullPage">
+      <StatsComponent />
+    </div>
+  );
+};
 
-export default Stats
+export default Stats;
