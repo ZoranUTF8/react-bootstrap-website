@@ -1,7 +1,6 @@
 fix:
 
 
-1.4 Add stats page - in proggress
 
 3: Make a separate Loading component 
 
