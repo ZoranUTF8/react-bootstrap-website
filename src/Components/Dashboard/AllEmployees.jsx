@@ -9,15 +9,21 @@ import {
   setEditEmployee,
   viewEmployee,
 } from "../../features/employee/employeeSlice";
-
+import PaginationContainer from "../Pagination/PaginationContainer";
 import moment from "moment";
 
 const AllEmployees = () => {
   const dispatch = useDispatch();
 
-  const { isDeleting, allEmployees, isGettingEmployees } = useSelector(
-    (store) => store.allEmployees
-  );
+  const {
+    isDeleting,
+    allEmployees,
+    isGettingEmployees,
+    totalEmployees,
+    numOfPages,
+    page,
+  } = useSelector((store) => store.allEmployees);
+
   const { isLoading } = useSelector((store) => store.employee);
 
   useEffect(() => {
@@ -44,9 +50,13 @@ const AllEmployees = () => {
     );
   }
 
+
   return (
     <div className="container p-3 fullPage d-flex flex-column">
       <h3 className="display-5 align-self-center">All employees</h3>
+      <h5>
+        Total {totalEmployees} employee{allEmployees.length > 1 && "s"} found.
+      </h5>
       <div class="table-responsive">
         <table className="table table-bordered table-hover">
           <thead className="table-secondary">
@@ -83,7 +93,6 @@ const AllEmployees = () => {
                 <td>{moment(user.createdAt).format("ll")}</td>
                 <td>{moment(user.updatedAt).format("ll")}</td>
                 <td className="table-action-button-container d-flex align-items-center justify-content-center">
-                
                   <button
                     className="btn btn-danger table-action-button"
                     onClick={() => dispatch(deleteEmployee(user._id))}
@@ -140,6 +149,7 @@ const AllEmployees = () => {
           </tbody>
         </table>
       </div>
+      {numOfPages > 1 && <PaginationContainer />}
     </div>
   );
 };

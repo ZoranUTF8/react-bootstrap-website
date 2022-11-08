@@ -15,6 +15,9 @@ const initialState = {
   defaultStats: [],
   monthlyApplication: [],
   isGettingDefaultStats: false,
+  totalEmployees: 0,
+  numOfPages: 1,
+  page: 1,
 };
 
 export const getEmployees = createAsyncThunk(
@@ -49,6 +52,8 @@ const allEmployeesSlice = createSlice({
       state.allEmployees = payload.allEmployees;
       state.isGettingEmployees = false;
       state.isDeleting = false;
+      state.numOfPages = payload.numOfPages;
+      state.totalEmployees = payload.count;
     },
     [getEmployees.rejected]: (state, { payload }) => {
       state.isGettingEmployees = false;
