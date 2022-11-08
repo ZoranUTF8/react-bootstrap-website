@@ -7,7 +7,6 @@ export const getAllEmployees = async (API_URL, thunkAPI) => {
       `${API_URL}employees`,
       authHeader(thunkAPI)
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
