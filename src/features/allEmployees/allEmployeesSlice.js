@@ -23,6 +23,7 @@ const initialState = {
 export const getEmployees = createAsyncThunk(
   "employee/getEmployyes",
   async (_, thunkAPI) => {
+
     return getAllEmployees(API_URL, thunkAPI);
   }
 );
@@ -64,6 +65,7 @@ const allEmployeesSlice = createSlice({
     },
     [getEmployees.rejected]: (state, { payload }) => {
       state.isGettingEmployees = false;
+
       toast.error(payload);
     },
     [deleteEmployee.pending]: (state) => {

@@ -28,7 +28,7 @@ const AllEmployees = () => {
 
   useEffect(() => {
     dispatch(getEmployees());
-  }, [isDeleting]);
+  }, [page, isDeleting]);
 
   if (isLoading || isGettingEmployees || isDeleting) {
     return (
@@ -49,7 +49,6 @@ const AllEmployees = () => {
       </div>
     );
   }
-
 
   return (
     <div className="container p-3 fullPage d-flex flex-column">

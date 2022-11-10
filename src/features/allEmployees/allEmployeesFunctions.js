@@ -2,9 +2,11 @@ import axios from "axios";
 import { authHeader } from "../../utils/authHeaders";
 
 export const getAllEmployees = async (API_URL, thunkAPI) => {
+  const { page } = thunkAPI.getState().allEmployees;
+
   try {
     const response = await axios.get(
-      `${API_URL}employees`,
+      `${API_URL}employees?page=${page}`,
       authHeader(thunkAPI)
     );
     return response.data;
