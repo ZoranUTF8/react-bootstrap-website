@@ -40,9 +40,16 @@ export const getDefaultStats = createAsyncThunk(
     return getDefaultEmployeesStats(API_URL, thunkAPI);
   }
 );
+
 const allEmployeesSlice = createSlice({
   name: "allEmployees",
   initialState,
+
+  reducers: {
+    changePage: (state, { payload }) => {
+      state.page = payload;
+    },
+  },
 
   extraReducers: {
     [getEmployees.pending]: (state) => {
@@ -87,5 +94,7 @@ const allEmployeesSlice = createSlice({
     },
   },
 });
+
+export const { changePage } = allEmployeesSlice.actions;
 
 export default allEmployeesSlice.reducer;
