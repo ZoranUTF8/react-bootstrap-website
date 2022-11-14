@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GiHamburgerMenu } from "react-icons/gi";
 import userSlice, {
   toggleSidebar,
-  logoutUser,
+  clearAppStoreAndLogout,
 } from "../../features/user/userSlice";
 
 const Navbar = () => {
@@ -87,7 +87,9 @@ const Navbar = () => {
                   <li className="nav-item">
                     <button
                       className="nav-link nav-logout"
-                      onClick={() => dispatch(logoutUser("Loging you out..."))}
+                      onClick={() =>
+                        dispatch(clearAppStoreAndLogout("Logging you out..."))
+                      }
                     >
                       Logout
                     </button>
