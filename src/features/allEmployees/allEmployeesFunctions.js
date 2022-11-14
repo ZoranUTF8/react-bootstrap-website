@@ -1,5 +1,6 @@
 import axios from "axios";
 import { authHeader } from "../../utils/authHeaders";
+import UnauthorizedError from "../../utils/unauthorizedError";
 
 export const getAllEmployees = async (API_URL, thunkAPI) => {
   const { page } = thunkAPI.getState().allEmployees;
@@ -11,7 +12,7 @@ export const getAllEmployees = async (API_URL, thunkAPI) => {
     );
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return UnauthorizedError(error, thunkAPI);
   }
 };
 
@@ -24,9 +25,7 @@ export const deleteSingleEmployee = async (API_URL, employeeId, thunkAPI) => {
 
     return response.data;
   } catch (error) {
-    console.log("mesage from error");
-    console.log(error.response.data);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return UnauthorizedError(error, thunkAPI);
   }
 };
 
@@ -38,6 +37,6 @@ export const getDefaultEmployeesStats = async (API_URL, thunkAPI) => {
     );
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return UnauthorizedError(error, thunkAPI);
   }
 };
