@@ -2,6 +2,7 @@ import axios from "axios";
 import { clearFormValues } from "./employeeSlice";
 import { logoutUser } from "../user/userSlice";
 import { authHeader } from "../../utils/authHeaders";
+import UnauthorizedError from "../../utils/unauthorizedError";
 
 export const createNewEmployee = async (API_URL, employee, thunkAPI) => {
   try {
@@ -15,12 +16,7 @@ export const createNewEmployee = async (API_URL, employee, thunkAPI) => {
 
     return response.data;
   } catch (error) {
-    // if authentication not valid logout useFr
-    if (error.response.status === 401) {
-      thunkAPI.dispatch(logoutUser());
-      return thunkAPI.rejectWithValue("Unauthorized, login out...");
-    }
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return UnauthorizedError(error, thunkAPI);
   }
 };
 
@@ -35,11 +31,6 @@ export const updateExistingEmployee = async (API_URL, employee, thunkAPI) => {
     thunkAPI.dispatch(clearFormValues());
     return response.data;
   } catch (error) {
-    // if authentication not valid logout user
-    if (error.response.status === 401) {
-      thunkAPI.dispatch(logoutUser());
-      return thunkAPI.rejectWithValue("Unauthorized, login out...");
-    }
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return UnauthorizedError(error, thunkAPI);
   }
 };
