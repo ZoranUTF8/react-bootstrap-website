@@ -23,7 +23,6 @@ const initialState = {
 export const getEmployees = createAsyncThunk(
   "employee/getEmployyes",
   async (_, thunkAPI) => {
-
     return getAllEmployees(API_URL, thunkAPI);
   }
 );
@@ -50,6 +49,7 @@ const allEmployeesSlice = createSlice({
     changePage: (state, { payload }) => {
       state.page = payload;
     },
+    clearAllEmployeesStore: (state) => initialState,
   },
 
   extraReducers: {
@@ -97,6 +97,6 @@ const allEmployeesSlice = createSlice({
   },
 });
 
-export const { changePage } = allEmployeesSlice.actions;
+export const { changePage, clearAllEmployeesStore } = allEmployeesSlice.actions;
 
 export default allEmployeesSlice.reducer;

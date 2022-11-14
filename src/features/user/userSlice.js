@@ -5,7 +5,11 @@ import {
   addUserToLocalStorage,
   removeUserFromLocalStorage,
 } from "../../utils/localStorageOperations";
-import { registerUserFunc, loginUserFunc } from "./userFunctions";
+import {
+  registerUserFunc,
+  loginUserFunc,
+  clearAppStoreOnLogout,
+} from "./userFunctions";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 
@@ -29,6 +33,11 @@ export const loginUser = createAsyncThunk(
   async (user, thunkAPI) => {
     return loginUserFunc(API_URL, user, thunkAPI);
   }
+);
+
+export const clearAppStoreAndLogout = createAsyncThunk(
+  "user/clearAppStoreAndLogout",
+  clearAppStoreOnLogout
 );
 
 const userSlice = createSlice({
@@ -56,9 +65,7 @@ const userSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, { payload }) => {
       const { userName, isAdmin, token } = payload;
-      //! CHECK IF ADMIN IS SENT
-      console.log("PAYLOAD", payload);
-      
+
       state.isLoading = false;
       state.user = payload;
       state.isAdmin = isAdmin;
@@ -84,6 +91,9 @@ const userSlice = createSlice({
     [loginUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+    [clearAppStoreAndLogout.rejected]: () => {
+      toast.error("Error logging you out.");
     },
   },
 });

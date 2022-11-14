@@ -60,6 +60,7 @@ const AllEmployees = () => {
         <table className="table table-bordered table-hover">
           <thead className="table-secondary">
             <tr>
+              <th scope="col">#</th>
               <th scope="col">Firstname</th>
               <th scope="col">Lastname</th>
               <th scope="col">Age</th>
@@ -76,8 +77,9 @@ const AllEmployees = () => {
             </tr>
           </thead>
           <tbody>
-            {allEmployees?.map((user) => (
+            {allEmployees?.map((user, index) => (
               <tr key={user._id} className="table-container ">
+                <td>{index}</td>
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.age}</td>
