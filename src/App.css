@@ -134,3 +134,7 @@ nav .nav-link:hover {
   font-size: 3rem;
 }
 
+/* General section height */
+.section-page-height {
+  min-height: 80vh;
+}

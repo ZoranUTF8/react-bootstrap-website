@@ -2,6 +2,9 @@ fix:
 
 
 1: Add delete and update user
+
+2: Remove view employee from navbar
+
 3: Make a separate Loading component 
 
 2: Check to display admin menu collapse only on admin routes

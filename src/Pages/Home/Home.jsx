@@ -8,13 +8,13 @@ const Home = () => {
     <div>
       <Slider />
 
-      <section className="section pt-5 mb-5">
+      <section className="border-top section mb-5 section-page-height d-flex justify-content-center align-items-center">
         <div className="container">
           <div className="row">
             <div className="col-md-6 text-center">
               <div className="main-heading">
                 <h1>Our Company</h1>
-                <div className="underline mx-auto mt-3 mb-3"></div>
+                <div className="underline mx-auto mb-3"></div>
                 <p>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Assumenda cum aliquam, in non libero dicta pariatur quas
@@ -26,12 +26,18 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="col-md-6 pt-5">
-              <img src={ourCompany} alt="our company" className="w-100" />
+            <div className="col-md-6">
+              <img
+                src={ourCompany}
+                alt="our company"
+                loading="lazy"
+                className="w-100"
+              />
             </div>
           </div>
         </div>
       </section>
+
       {/* VMV */}
       <Vmv />
 
