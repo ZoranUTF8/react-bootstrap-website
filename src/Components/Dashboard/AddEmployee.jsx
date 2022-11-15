@@ -6,6 +6,7 @@ import {
   updateEmployee,
   createEmployee,
 } from "../../features/employee/employeeSlice";
+import Loading from "../Loading/Loading";
 
 const AddEmployee = () => {
   const dispatch = useDispatch();
@@ -241,7 +242,7 @@ const AddEmployee = () => {
               disabled={isLoading}
             >
               {isEditing && "Update"}
-              {isLoading && !isEditing && "Loading..."}
+              {isLoading && !isEditing && <Loading />}
               {!isLoading && !isEditing && "Add"}
             </button>
           </div>

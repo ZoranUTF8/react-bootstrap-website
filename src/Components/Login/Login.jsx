@@ -21,9 +21,7 @@ const Login = () => {
   // check if user is already logged in
   useEffect(() => {
     if (user) {
-      setTimeout(() => {
-        navigate("/admin");
-      }, 3000);
+      navigate("/admin");
     }
   }, [user]);
 
