@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <Slider />
 
-      <section className="border-top section mb-5 section-page-height d-flex justify-content-center align-items-center">
+      <section className="section mb-5 section-page-height d-flex justify-content-center align-items-center">
         <div className="container">
           <div className="row">
             <div className="col-md-6 text-center">

@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { GiHamburgerMenu } from "react-icons/gi";
 import userSlice, {
-  toggleSidebar,
   clearAppStoreAndLogout,
 } from "../../features/user/userSlice";
 
@@ -15,22 +13,12 @@ const Navbar = () => {
 
   const isAdmin = user?.isAdmin;
 
-  const toggleSidebarBtn = () => {
-    dispatch(toggleSidebar());
-  };
-
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
         <Link to={"/"} className="navbar-brand ">
           <h4 className="display-6">Company Name</h4>
         </Link>
-
-        {isAdmin && (
-          <button className="sidebar_button" onClick={toggleSidebarBtn}>
-            <GiHamburgerMenu size="40" />
-          </button>
-        )}
 
         <button
           className="navbar-toggler"
@@ -81,7 +69,22 @@ const Navbar = () => {
                 <ul className="dropdown-menu">
                   <li className="nav-item">
                     <Link to="admin" className="nav-link">
-                      Dashboard
+                      Stats
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="admin/all-employees" className="nav-link">
+                      All employees
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="admin/add-employees" className="nav-link">
+                      Add employee
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="admin/profile" className="nav-link">
+                      My profile
                     </Link>
                   </li>
                   <li className="nav-item">

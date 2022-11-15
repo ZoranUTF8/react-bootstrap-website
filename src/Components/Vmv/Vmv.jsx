@@ -2,7 +2,7 @@ import React from "react";
 
 const Vmv = () => {
   return (
-    <section className="bg-light border-top ">
+    <section className="bg-light border-top section-page-height-50 d-flex justify-content-center align-items-center">
       <div className="container">
         <div className="row p-5">
           <div className="col-md-12 text-center">

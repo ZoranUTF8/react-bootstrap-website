@@ -138,3 +138,6 @@ nav .nav-link:hover {
 .section-page-height {
   min-height: 80vh;
 }
+.section-page-height-50 {
+  min-height: 50vh;
+}
