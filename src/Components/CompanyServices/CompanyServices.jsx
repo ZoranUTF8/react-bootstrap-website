@@ -3,7 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CompanyServices = () => {
   return (
-    <section className=" border-top section-page-height d-flex flex-column align-items-center">
+    <section className="border-top section-page-height d-flex flex-column align-items-center mb-md-0 mb-sm-5">
       <div className="container">
         <div className="row pt-5">
           <div className="col-md-12 text-center">
@@ -16,8 +16,8 @@ const CompanyServices = () => {
       <div className="container pt-5">
         <div className="row g-3">
           {ServicesData.map((services) => (
-            <div className="col-12 col-md-6 col-lg-4" key={services.id}>
-              <div className="card shadow hoverable">
+            <div className="col-md-6 col-lg-4" key={services.id}>
+              <div className="card shadow text-center">
                 <img
                   src={services.imgPath} // use normal <img> attributes as props
                   loading="lazy"
@@ -27,9 +27,9 @@ const CompanyServices = () => {
                   style={{ "object-fit": "fill" }}
                 />
 
-                <div className="card-body">
+                <div className="card-body text-center">
                   <h6>{services.title}</h6>
-                  <div className="underline"></div>
+                  <div className="underline mx-auto m-3"></div>
                   <p>{services.text}</p>
                 </div>
               </div>

@@ -16,7 +16,6 @@ const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 // initialization state
 const initialState = {
   isLoading: false,
-  sidebarOpen: true,
   isAdmin: false,
   user: getUserFromLocalStorage(),
 };
@@ -45,9 +44,6 @@ const userSlice = createSlice({
   initialState,
 
   reducers: {
-    toggleSidebar: (state) => {
-      state.sidebarOpen = !state.sidebarOpen;
-    },
     logoutUser: (state, { payload }) => {
       state.user = null;
       state.sidebarOpen = false;
@@ -97,5 +93,5 @@ const userSlice = createSlice({
     },
   },
 });
-export const { toggleSidebar, logoutUser } = userSlice.actions;
+export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;
