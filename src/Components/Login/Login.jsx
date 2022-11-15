@@ -135,7 +135,12 @@ const Login = () => {
           </form>
         </div>
         <div className="col-md-8">
-          <img src={loginPage} alt="login image" className="img-fluid w-100" />
+          <img
+            src={loginPage}
+            alt="login image"
+            className="img-fluid w-100"
+            loading="lazy"
+          />
         </div>
       </div>
     </div>
