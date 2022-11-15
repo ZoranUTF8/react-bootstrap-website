@@ -11,6 +11,7 @@ import {
 } from "../../features/employee/employeeSlice";
 import PaginationContainer from "../Pagination/PaginationContainer";
 import moment from "moment";
+import Loading from "../Loading/Loading";
 
 const AllEmployees = () => {
   const dispatch = useDispatch();
@@ -31,14 +32,7 @@ const AllEmployees = () => {
   }, [page, isDeleting]);
 
   if (isLoading || isGettingEmployees || isDeleting) {
-    return (
-      <div class="container fullPage d-flex align-items-center justify-content-center">
-        <div class="jumbotron full-height-element d-flex align-items-center justify-content-center flex-column">
-          <div class="spinner-border mb-3"></div>
-          <h1>Loading</h1>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
   if (allEmployees.length === 0) {
     return (
