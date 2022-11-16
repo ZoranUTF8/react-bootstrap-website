@@ -18,6 +18,7 @@ const initialState = {
   isLoading: false,
   isAdmin: false,
   user: getUserFromLocalStorage(),
+  avatarUrl: "",
 };
 
 export const registerUser = createAsyncThunk(
