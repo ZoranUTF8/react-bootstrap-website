@@ -4,6 +4,7 @@ import { clearAllEmployeesStore } from "../allEmployees/allEmployeesSlice";
 import { clearFormValues } from "../employee/employeeSlice";
 
 export const registerUserFunc = async (url, user, thunkApi) => {
+  console.log("user inside slice ", user);
   try {
     const response = await axios.post(`${url}auth/register`, user);
     return response.data;
@@ -38,7 +39,6 @@ export const clearAppStoreOnLogout = async (message, thunkApi) => {
 
 export const addUserAvatar = async (userAvatar, thunkApi) => {
   if (userAvatar.type === "image/jpeg" || userAvatar.type === "image/png") {
-
     const data = new FormData();
 
     data.append("file", userAvatar);

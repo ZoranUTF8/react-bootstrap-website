@@ -42,27 +42,51 @@ const Login = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const avatarData = await dispatch(uploadUserAvatar(userState.imageFile));
-
-    setUserState({ ...userState, avatarUrl: avatarData.payload.url });
-
     const { email, password, name, isMember, avatarUrl } = userState;
 
-    if (!email || !password || !avatarUrl || (!isMember && !name)) {
-      return toast.error("Check your input", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-      });
-    }
+    switch (isMember) {
+      case true:
+        if (!email || !password) {
+          return toast.error("Check your input", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          });
+        } else {
+          dispatch(loginUser({ email, password }));
+          console.log(userState);
+        }
+        break;
+      case false:
+        if (!email || !password || !name) {
+          return toast.error("Check your input", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          });
+        } else {
+          const avatarData = await dispatch(
+            uploadUserAvatar(userState.imageFile)
+          );
+          
+          avatarData &&
+            setUserState({ ...userState, avatarUrl: avatarData.payload.url });
 
-    isMember
-      ? dispatch(loginUser({ email, password }))
-      : dispatch(registerUser({ email, password, name, avatarUrl }));
+          dispatch(registerUser({ email, password, name, avatarUrl }));
+        }
+        break;
+
+      default:
+        break;
+    }
   };
 
   // Handle demo user
@@ -105,17 +129,14 @@ const Login = () => {
                   maxLength="30"
                 />
                 {/* Image upload */}
+
                 <input
                   type="file"
                   name="file"
                   id="file"
-                  className="input-file"
+                  className="form-control form-control-sm mt-3"
                   onChange={(e) => handleFile(e)}
                 />
-                <label htmlFor="file" className="btn btn-tertiary js-labelFile">
-                  <i className="icon fa fa-check"></i>
-                  <span className="js-fileName">Choose a file</span>
-                </label>
               </div>
             )}
 
