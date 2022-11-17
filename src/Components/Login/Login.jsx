@@ -47,7 +47,7 @@ const Login = () => {
     setUserState({ ...userState, avatarUrl: avatarData.payload.url });
 
     const { email, password, name, isMember, avatarUrl } = userState;
-    console.log(userState);
+
     if (!email || !password || !avatarUrl || (!isMember && !name)) {
       return toast.error("Check your input", {
         position: "top-right",
@@ -63,8 +63,6 @@ const Login = () => {
     isMember
       ? dispatch(loginUser({ email, password }))
       : dispatch(registerUser({ email, password, name, avatarUrl }));
-
-    clearFields();
   };
 
   // Handle demo user
@@ -82,10 +80,6 @@ const Login = () => {
   const handleFile = (e) => {
     let file = e.target.files[0];
     setUserState({ ...userState, imageFile: file });
-  };
-
-  const clearFields = () => {
-    setUserState(initialUserState);
   };
 
   if (isLoading) return <Loading />;
