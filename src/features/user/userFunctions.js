@@ -4,7 +4,7 @@ import { clearAllEmployeesStore } from "../allEmployees/allEmployeesSlice";
 import { clearFormValues } from "../employee/employeeSlice";
 
 export const registerUserFunc = async (url, user, thunkApi) => {
-  console.log("user inside slice ", user);
+  console.log("user inside register ", user);
   try {
     const response = await axios.post(`${url}auth/register`, user);
     return response.data;

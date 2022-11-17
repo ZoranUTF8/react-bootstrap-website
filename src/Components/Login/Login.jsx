@@ -16,13 +16,11 @@ const initialUserState = {
   password: "",
   isMember: true,
   imageFile: null,
-  avatarUrl: "",
 };
 
 const Login = () => {
   // Component state
   const [userState, setUserState] = useState(initialUserState);
-  const [userAvatar, setUserAvatar] = useState("");
   const { user, isLoading } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +40,7 @@ const Login = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { email, password, name, isMember, avatarUrl } = userState;
+    let { email, password, isMember, name, imageFile } = userState;
 
     switch (isMember) {
       case true:
@@ -58,11 +56,10 @@ const Login = () => {
           });
         } else {
           dispatch(loginUser({ email, password }));
-          console.log(userState);
         }
         break;
       case false:
-        if (!email || !password || !name) {
+        if (!email || !password || !name || !imageFile) {
           return toast.error("Check your input", {
             position: "top-right",
             autoClose: 5000,
@@ -73,18 +70,16 @@ const Login = () => {
             theme: "light",
           });
         } else {
-          const avatarData = await dispatch(
-            uploadUserAvatar(userState.imageFile)
-          );
-          
-          avatarData &&
-            setUserState({ ...userState, avatarUrl: avatarData.payload.url });
+          const {
+            payload: { url: imgUrl },
+          } = await dispatch(uploadUserAvatar(userState.imageFile));
 
-          dispatch(registerUser({ email, password, name, avatarUrl }));
+          dispatch(registerUser({ email, password, name, imgUrl }));
         }
         break;
 
       default:
+        console.log("No such option");
         break;
     }
   };
@@ -187,6 +182,7 @@ const Login = () => {
             >
               {isLoading ? "Loading..." : "Live demo"}
             </button>
+            {/* is member toggle button */}
             <p className="text-center d-flex justify-content-center align-items-center">
               {userState.isMember ? "Not Registered ?" : "Already Registered ?"}
               <button className="btn" onClick={toggleMember}>
