@@ -1,13 +1,10 @@
 fix:
 
+ *Add image to user profile but first api
 
-1: Add delete and update user
+ Add delete and update user
 
-2: Remove view employee from navbar
+ If user is not admin transfer to regular actions available
 
-3: Make a separate Loading component 
-
-5: Is it better to have more slices for like an action where we get all employees
-
-6: Delete sidebar menu from regular routes
+ Check if possible to remove asAdmin from the local storage 
 

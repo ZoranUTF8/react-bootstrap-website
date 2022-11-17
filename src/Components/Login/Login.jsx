@@ -4,25 +4,27 @@ import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
+
 const initialUserState = {
   name: "",
   email: "",
   password: "",
   isMember: true,
+  avatarUrl: "",
 };
 
 const Login = () => {
   // Component state
   const [userState, setUserState] = useState(initialUserState);
+  const [userAvatar, setUserAvatar] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
   const { user, isLoading } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // check if user is already logged in
   useEffect(() => {
-    if (user) {
-      navigate("/admin");
-    }
+    user && navigate("/admin");
   }, [user]);
 
   // Component functions
@@ -52,12 +54,35 @@ const Login = () => {
       ? dispatch(loginUser({ email, password }))
       : dispatch(registerUser({ email, password, name }));
   };
+
+  // Handle demo user
+  const handleDemoUser = () => {
+    dispatch(loginUser({ email: "testuser@gmail.com", password: "testuser" }));
+  };
   // Toggle member
   const toggleMember = () => {
     setUserState((prevState) => ({
       ...prevState,
       isMember: !prevState.isMember,
     }));
+  };
+
+  // Upload avatar to cloudinary
+  const uploadImage = () => {
+    const data = new FormData();
+    data.append("file", userAvatar);
+    data.append("upload_preset", "user_avatar");
+    data.append("cloud_name", "dfglx59pn");
+
+    fetch("https://api.cloudinary.com/v1_1/dfglx59pn/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setAvatarUrl(data.url);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -81,6 +106,19 @@ const Login = () => {
                   minLength="3"
                   maxLength="30"
                 />
+                {/* Image upload */}
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  class="input-file"
+                  onChange={(e) => setUserAvatar(e.target.files[0])}
+                />
+                <label for="file" class="btn btn-tertiary js-labelFile">
+                  <i class="icon fa fa-check"></i>
+                  <span class="js-fileName">Choose a file</span>
+                </label>
+                <img src={avatarUrl} alt="" />
               </div>
             )}
 
@@ -118,11 +156,20 @@ const Login = () => {
             </div>
 
             <button
-              type="submit"
+              type="button"
               className="btn btn-info w-100 mb-1"
               disabled={isLoading}
+              onClick={uploadImage}
             >
               {isLoading ? "Loading..." : "Submit"}
+            </button>
+            <button
+              type="button"
+              className="btn btn-success w-100 mb-1"
+              disabled={isLoading}
+              onClick={handleDemoUser}
+            >
+              {isLoading ? "Loading..." : "Live demo"}
             </button>
             <p className="text-center d-flex justify-content-center align-items-center">
               {userState.isMember ? "Not Registered ?" : "Already Registered ?"}

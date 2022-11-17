@@ -3,7 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CompanyServices = () => {
   return (
-    <section className="border-top section-page-height d-flex flex-column align-items-center mb-md-0 mb-sm-5">
+    <section className=" pb-5 border-top  section-page-height d-flex flex-column align-items-center">
       <div className="container">
         <div className="row pt-5">
           <div className="col-md-12 text-center">
