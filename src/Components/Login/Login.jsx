@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import loginPage from "../../assets/images/loginPage.svg";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser, registerUser } from "../../features/user/userSlice";
+import {
+  loginUser,
+  registerUser,
+  uploadUserAvatar,
+} from "../../features/user/userSlice";
+import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 
 const initialUserState = {
@@ -10,6 +15,7 @@ const initialUserState = {
   email: "",
   password: "",
   isMember: true,
+  imageFile: null,
   avatarUrl: "",
 };
 
@@ -17,7 +23,6 @@ const Login = () => {
   // Component state
   const [userState, setUserState] = useState(initialUserState);
   const [userAvatar, setUserAvatar] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
   const { user, isLoading } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,12 +39,16 @@ const Login = () => {
     setUserState({ ...userState, [name]: value });
   };
   // Handle form submission
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { email, password, name, isMember } = userState;
+    const avatarData = await dispatch(uploadUserAvatar(userState.imageFile));
 
-    if (!email || !password || (!isMember && !name)) {
+    setUserState({ ...userState, avatarUrl: avatarData.payload.url });
+
+    const { email, password, name, isMember, avatarUrl } = userState;
+    console.log(userState);
+    if (!email || !password || !avatarUrl || (!isMember && !name)) {
       return toast.error("Check your input", {
         position: "top-right",
         autoClose: 5000,
@@ -50,9 +59,12 @@ const Login = () => {
         theme: "light",
       });
     }
+
     isMember
       ? dispatch(loginUser({ email, password }))
-      : dispatch(registerUser({ email, password, name }));
+      : dispatch(registerUser({ email, password, name, avatarUrl }));
+
+    clearFields();
   };
 
   // Handle demo user
@@ -67,24 +79,16 @@ const Login = () => {
     }));
   };
 
-  // Upload avatar to cloudinary
-  const uploadImage = () => {
-    const data = new FormData();
-    data.append("file", userAvatar);
-    data.append("upload_preset", "user_avatar");
-    data.append("cloud_name", "dfglx59pn");
-
-    fetch("https://api.cloudinary.com/v1_1/dfglx59pn/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setAvatarUrl(data.url);
-      })
-      .catch((err) => console.log(err));
+  const handleFile = (e) => {
+    let file = e.target.files[0];
+    setUserState({ ...userState, imageFile: file });
   };
 
+  const clearFields = () => {
+    setUserState(initialUserState);
+  };
+
+  if (isLoading) return <Loading />;
   return (
     <div className="container p-3">
       <div className="row">
@@ -111,14 +115,13 @@ const Login = () => {
                   type="file"
                   name="file"
                   id="file"
-                  class="input-file"
-                  onChange={(e) => setUserAvatar(e.target.files[0])}
+                  className="input-file"
+                  onChange={(e) => handleFile(e)}
                 />
-                <label for="file" class="btn btn-tertiary js-labelFile">
-                  <i class="icon fa fa-check"></i>
-                  <span class="js-fileName">Choose a file</span>
+                <label htmlFor="file" className="btn btn-tertiary js-labelFile">
+                  <i className="icon fa fa-check"></i>
+                  <span className="js-fileName">Choose a file</span>
                 </label>
-                <img src={avatarUrl} alt="" />
               </div>
             )}
 
@@ -154,12 +157,10 @@ const Login = () => {
                 minLength="8"
               />
             </div>
-
             <button
-              type="button"
+              type="submit"
               className="btn btn-info w-100 mb-1"
               disabled={isLoading}
-              onClick={uploadImage}
             >
               {isLoading ? "Loading..." : "Submit"}
             </button>

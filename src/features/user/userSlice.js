@@ -9,6 +9,7 @@ import {
   registerUserFunc,
   loginUserFunc,
   clearAppStoreOnLogout,
+  addUserAvatar,
 } from "./userFunctions";
 
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
@@ -18,12 +19,12 @@ const initialState = {
   isLoading: false,
   isAdmin: false,
   user: getUserFromLocalStorage(),
-  avatarUrl: "",
 };
 
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (user, thunkAPI) => {
+    console.log("USER IN REGISTER", user);
     return registerUserFunc(API_URL, user, thunkAPI);
   }
 );
@@ -38,6 +39,13 @@ export const loginUser = createAsyncThunk(
 export const clearAppStoreAndLogout = createAsyncThunk(
   "user/clearAppStoreAndLogout",
   clearAppStoreOnLogout
+);
+
+export const uploadUserAvatar = createAsyncThunk(
+  "user/uploadAvatar",
+  async (userAvatar, thunkApi) => {
+    return addUserAvatar(userAvatar, thunkApi);
+  }
 );
 
 const userSlice = createSlice({
@@ -91,6 +99,17 @@ const userSlice = createSlice({
     },
     [clearAppStoreAndLogout.rejected]: () => {
       toast.error("Error logging you out.");
+    },
+    [uploadUserAvatar.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [uploadUserAvatar.fulfilled]: (state) => {
+      state.isLoading = false;
+      toast.success("Profile image uploaded successfully.");
+    },
+    [uploadUserAvatar.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
     },
   },
 });
