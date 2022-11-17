@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import loginPage from "../../assets/images/loginPage.svg";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser, registerUser } from "../../features/user/userSlice";
+import {
+  loginUser,
+  registerUser,
+  uploadUserAvatar,
+} from "../../features/user/userSlice";
+import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 
 const initialUserState = {
@@ -10,14 +15,12 @@ const initialUserState = {
   email: "",
   password: "",
   isMember: true,
-  avatarUrl: "",
+  imageFile: null,
 };
 
 const Login = () => {
   // Component state
   const [userState, setUserState] = useState(initialUserState);
-  const [userAvatar, setUserAvatar] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
   const { user, isLoading } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,25 +37,51 @@ const Login = () => {
     setUserState({ ...userState, [name]: value });
   };
   // Handle form submission
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { email, password, name, isMember } = userState;
+    let { email, password, isMember, name, imageFile } = userState;
 
-    if (!email || !password || (!isMember && !name)) {
-      return toast.error("Check your input", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-      });
+    switch (isMember) {
+      case true:
+        if (!email || !password) {
+          return toast.error("Check your input", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          });
+        } else {
+          dispatch(loginUser({ email, password }));
+        }
+        break;
+      case false:
+        if (!email || !password || !name || !imageFile) {
+          return toast.error("Check your input", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          });
+        } else {
+          const {
+            payload: { url: imgUrl },
+          } = await dispatch(uploadUserAvatar(userState.imageFile));
+
+          dispatch(registerUser({ email, password, name, imgUrl }));
+        }
+        break;
+
+      default:
+        console.log("No such option");
+        break;
     }
-    isMember
-      ? dispatch(loginUser({ email, password }))
-      : dispatch(registerUser({ email, password, name }));
   };
 
   // Handle demo user
@@ -67,24 +96,12 @@ const Login = () => {
     }));
   };
 
-  // Upload avatar to cloudinary
-  const uploadImage = () => {
-    const data = new FormData();
-    data.append("file", userAvatar);
-    data.append("upload_preset", "user_avatar");
-    data.append("cloud_name", "dfglx59pn");
-
-    fetch("https://api.cloudinary.com/v1_1/dfglx59pn/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setAvatarUrl(data.url);
-      })
-      .catch((err) => console.log(err));
+  const handleFile = (e) => {
+    let file = e.target.files[0];
+    setUserState({ ...userState, imageFile: file });
   };
 
+  if (isLoading) return <Loading />;
   return (
     <div className="container p-3">
       <div className="row">
@@ -107,18 +124,14 @@ const Login = () => {
                   maxLength="30"
                 />
                 {/* Image upload */}
+
                 <input
                   type="file"
                   name="file"
                   id="file"
-                  class="input-file"
-                  onChange={(e) => setUserAvatar(e.target.files[0])}
+                  className="form-control form-control-sm mt-3"
+                  onChange={(e) => handleFile(e)}
                 />
-                <label for="file" class="btn btn-tertiary js-labelFile">
-                  <i class="icon fa fa-check"></i>
-                  <span class="js-fileName">Choose a file</span>
-                </label>
-                <img src={avatarUrl} alt="" />
               </div>
             )}
 
@@ -154,12 +167,10 @@ const Login = () => {
                 minLength="8"
               />
             </div>
-
             <button
-              type="button"
+              type="submit"
               className="btn btn-info w-100 mb-1"
               disabled={isLoading}
-              onClick={uploadImage}
             >
               {isLoading ? "Loading..." : "Submit"}
             </button>
@@ -171,6 +182,7 @@ const Login = () => {
             >
               {isLoading ? "Loading..." : "Live demo"}
             </button>
+            {/* is member toggle button */}
             <p className="text-center d-flex justify-content-center align-items-center">
               {userState.isMember ? "Not Registered ?" : "Already Registered ?"}
               <button className="btn" onClick={toggleMember}>
