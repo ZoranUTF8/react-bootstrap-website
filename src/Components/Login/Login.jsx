@@ -37,11 +37,13 @@ const Login = () => {
     setUserState({ ...userState, [name]: value });
   };
   // Handle form submission
+  //! FIX
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     let { email, password, isMember, name, imageFile } = userState;
 
+    console.log("handleSubmit");
     switch (isMember) {
       case true:
         if (!email || !password) {
@@ -148,6 +150,7 @@ const Login = () => {
                 value={userState.email}
                 onChange={handleChange}
               />
+
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
               </div>
