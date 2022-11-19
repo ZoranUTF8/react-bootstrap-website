@@ -73,10 +73,10 @@ const Login = () => {
           });
         } else {
           const {
-            payload: { url: imgUrl },
+            payload: { url: avatarUrl },
           } = await dispatch(uploadUserAvatar(userState.imageFile));
 
-          dispatch(registerUser({ email, password, name, imgUrl }));
+          dispatch(registerUser({ email, password, name, avatarUrl }));
         }
         break;
 
