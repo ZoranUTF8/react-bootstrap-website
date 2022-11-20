@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
 
 const ProfileComponent = () => {
-  const { isLoading, user } = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user);
+  const avatarUrl = user?.user?.avatarUrl || defaultUserAvatar;
+  console.log(user?.user?.avatarUrl);
   const dispatch = useDispatch();
-  
+
   const [userData, setUserData] = useState({
     userName: user?.userName || "",
   });
 
-  // add logic for deleting adn updating a user
+  // add logic for deleting and updating a user
   function handleSubmit(e) {
     e.preventDefault();
-   
-
-    console.log("ola");
   }
 
   return (
@@ -25,20 +25,22 @@ const ProfileComponent = () => {
     >
       <div className="row g-3 d-flex flex-row justify-content-center">
         <div className="mb-3 col-md-6">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            name="username"
-            value={userData.userName}
-            aria-describedby="emailHelp"
-            readOnly
-          />
-          <div id="usernameHelp" className="form-text">
-            Your username
+          <div class="form-group text-center">
+            <img src={avatarUrl} alt="User avatar" className="w-100 h-100" />
+          </div>
+          <div class="form-group">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              name="username"
+              value={userData.userName}
+              aria-describedby="emailHelp"
+              readOnly
+            />
           </div>
         </div>
       </div>

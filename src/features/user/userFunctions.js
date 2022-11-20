@@ -3,18 +3,18 @@ import { logoutUser } from "./userSlice";
 import { clearAllEmployeesStore } from "../allEmployees/allEmployeesSlice";
 import { clearFormValues } from "../employee/employeeSlice";
 
-export const registerUserFunc = async (url, user, thunkApi) => {
+export const registerUserFunc = async (API_UR, user, thunkApi) => {
   try {
-    const response = await axios.post(`${url}auth/register`, user);
+    const response = await axios.post(`${API_UR}auth/register`, user);
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
   }
 };
 
-export const loginUserFunc = async (url, user, thunkApi) => {
+export const loginUserFunc = async (API_UR, user, thunkApi) => {
   try {
-    const response = await axios.post(`${url}auth/login`, user);
+    const response = await axios.post(`${API_UR}auth/login`, user);
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
@@ -39,7 +39,6 @@ export const clearAppStoreOnLogout = async (message, thunkApi) => {
 export const addUserAvatar = async (userAvatar, thunkApi) => {
   if (userAvatar.type === "image/jpeg" || userAvatar.type === "image/png") {
     const data = new FormData();
-
     data.append("file", userAvatar);
     data.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
     data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
