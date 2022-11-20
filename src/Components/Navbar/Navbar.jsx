@@ -14,8 +14,7 @@ const Navbar = () => {
 
   const isAdmin = user?.user?.isAdmin;
   const avatarUrl = user?.user?.avatarUrl || defaultUserAvatar;
-  console.log(avatarUrl);
-  
+
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
@@ -36,39 +35,20 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="about" className="nav-link">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="contact" className="nav-link">
-                Contact
-              </Link>
-            </li>
-            {!user && (
-              <li className="nav-item">
-                <Link to="login" className="nav-link">
-                  Login
-                </Link>
-              </li>
-            )}
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0  d-flex align-items-center">
             {isAdmin && (
               <li className="nav-item dropdown">
-                <p
-                  className="nav-link dropdown-toggle"
-                  role="button"
+                <img
+                  src={avatarUrl}
+                  width="60"
+                  height="60"
+                  alt="user_avatar"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                >
-                  {user?.userName || "Admin"}
-                </p>
+                  style={{ "border-radius": "50%" }}
+                  role="button"
+                  className="nav-link dropdown-toggle navbar-avatar"
+                />
                 <ul className="dropdown-menu">
                   <li className="nav-item">
                     <Link to="admin" className="nav-link">
@@ -101,6 +81,28 @@ const Navbar = () => {
                     </button>
                   </li>
                 </ul>
+              </li>
+            )}
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="about" className="nav-link">
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="contact" className="nav-link">
+                Contact
+              </Link>
+            </li>
+            {!user.user && (
+              <li className="nav-item">
+                <Link to="login" className="nav-link">
+                  Login
+                </Link>
               </li>
             )}
           </ul>

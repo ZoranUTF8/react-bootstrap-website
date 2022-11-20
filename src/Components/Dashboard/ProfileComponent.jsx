@@ -25,8 +25,16 @@ const ProfileComponent = () => {
     >
       <div className="row g-3 d-flex flex-row justify-content-center">
         <div className="mb-3 col-md-6">
-          <div class="form-group text-center">
-            <img src={avatarUrl} alt="User avatar" className="w-100 h-100" />
+          <div class="form-group d-flex justify-content-between">
+            <label htmlFor="user-avatar" className="form-label">
+              Avatar
+            </label>
+            <img
+              src={avatarUrl}
+              alt="User avatar"
+              className="user-avatar"
+              id="user-avatar"
+            />
           </div>
           <div class="form-group">
             <label htmlFor="username" className="form-label">
@@ -47,7 +55,7 @@ const ProfileComponent = () => {
 
       <div class="row d-flex justify-content-center">
         <div className="col-sm-12 col-md-6 align-self-center">
-          <button class="btn btn-primary w-100" type="submit">
+          <button class="btn btn-danger w-100" type="submit">
             Delete account
           </button>
         </div>
