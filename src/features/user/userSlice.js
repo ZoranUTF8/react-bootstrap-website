@@ -17,14 +17,13 @@ const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 // initialization state
 const initialState = {
   isLoading: false,
-  isAdmin: false,
   user: getUserFromLocalStorage(),
 };
 
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (user, thunkAPI) => {
-    return registerUserFunc(user, thunkAPI);
+    return registerUserFunc(API_URL, user, thunkAPI);
   }
 );
 
@@ -54,7 +53,6 @@ const userSlice = createSlice({
   reducers: {
     logoutUser: (state, { payload }) => {
       state.user = null;
-      state.sidebarOpen = false;
       removeUserFromLocalStorage();
       if (payload) {
         toast.success(payload);
@@ -72,7 +70,6 @@ const userSlice = createSlice({
 
       state.isLoading = false;
       state.user = payload;
-      state.isAdmin = isAdmin;
 
       addUserToLocalStorage({ userName, token });
       toast.success(`Hello there ${userName}`);
@@ -85,11 +82,10 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      const { userName, isAdmin } = payload;
+      const { userName, token } = payload;
       state.isLoading = false;
       state.user = payload;
-      state.isAdmin = isAdmin;
-      addUserToLocalStorage(payload);
+      addUserToLocalStorage({ token });
       toast.success(`Welcome back ${userName}`);
     },
     [loginUser.rejected]: (state, { payload }) => {

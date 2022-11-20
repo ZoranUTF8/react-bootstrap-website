@@ -1,6 +1,6 @@
 fix:
 
- *Hanld eimage in api and save the url to the database 
+
 
  
 
@@ -9,4 +9,6 @@ fix:
  If user is not admin transfer to regular actions available
 
  Check if possible to remove asAdmin from the local storage 
+
+ 1: How to have the isAdmin when we reload the page
 

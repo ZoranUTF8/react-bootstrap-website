@@ -43,7 +43,6 @@ const Login = () => {
 
     let { email, password, isMember, name, imageFile } = userState;
 
-    console.log("handleSubmit");
     switch (isMember) {
       case true:
         if (!email || !password) {
@@ -75,7 +74,7 @@ const Login = () => {
           const {
             payload: { url: avatarUrl },
           } = await dispatch(uploadUserAvatar(userState.imageFile));
-
+          
           dispatch(registerUser({ email, password, name, avatarUrl }));
         }
         break;
@@ -104,6 +103,7 @@ const Login = () => {
   };
 
   if (isLoading) return <Loading />;
+  
   return (
     <div className="container p-3">
       <div className="row">
