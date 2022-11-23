@@ -1,4 +1,8 @@
 /* General */
+:root {
+  --generalInfo: #1e90ff;
+  --generalWhite: #ffffff;
+}
 .fullPage {
   min-height: 80vh;
 }
@@ -99,6 +103,9 @@ nav .nav-link:hover {
   width: 70px !important;
   opacity: 90% !important;
   margin-right: 5px;
+}
+.table-action-button-disabled {
+  display: none;
 }
 
 /* Stats item card */

@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
   removeUserFromLocalStorage,
 } from "../../utils/localStorageOperations";
+
 import {
   registerUserFunc,
   loginUserFunc,

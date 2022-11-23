@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { createNewEmployee, updateExistingEmployee } from "./employeeFunctions";
 
+
 const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
 const initialState = {
   isLoading: false,
@@ -31,6 +32,7 @@ export const createEmployee = createAsyncThunk(
   async (employee, thunkAPI) => {
     return createNewEmployee(API_URL, employee, thunkAPI);
   }
+  
 );
 
 export const updateEmployee = createAsyncThunk(
@@ -53,6 +55,7 @@ const employeeSlice = createSlice({
     },
     setEditEmployee: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
+      
     },
     viewEmployee: (state, { payload }) => {
       return { ...state, ...payload };
