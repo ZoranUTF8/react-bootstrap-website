@@ -1,4 +1,8 @@
 /* General */
+:root {
+  --generalInfo: #1e90ff;
+  --generalWhite: #ffffff;
+}
 .fullPage {
   min-height: 80vh;
 }
