@@ -100,6 +100,9 @@ nav .nav-link:hover {
   opacity: 90% !important;
   margin-right: 5px;
 }
+.table-action-button-disabled {
+  display: none;
+}
 
 /* Stats item card */
 .stat_item_card {

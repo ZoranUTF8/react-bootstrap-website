@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import userSlice, {
-  clearAppStoreAndLogout,
-} from "../../features/user/userSlice";
+import { clearAppStoreAndLogout } from "../../features/user/userSlice";
 import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   // If admin logged in exists than show employees status navbar
-  // get admin from the store
   const user = useSelector((store) => store.user);
-
   const isAdmin = user?.user?.isAdmin;
   const avatarUrl = user?.user?.avatarUrl || defaultUserAvatar;
 

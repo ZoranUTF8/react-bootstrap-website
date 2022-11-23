@@ -12,6 +12,7 @@ import {
 import PaginationContainer from "../Pagination/PaginationContainer";
 import moment from "moment";
 import Loading from "../Loading/Loading";
+import { toast } from "react-toastify";
 
 const AllEmployees = () => {
   const dispatch = useDispatch();
@@ -24,16 +25,32 @@ const AllEmployees = () => {
     numOfPages,
     page,
   } = useSelector((store) => store.allEmployees);
-
   const { isLoading } = useSelector((store) => store.employee);
+
+  const {
+    user: { userName },
+  } = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch(getEmployees());
+
+    if (userName === "demo") {
+      toast.error("Demo user, limited functions.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+    }
   }, [page, isDeleting]);
 
   if (isLoading || isGettingEmployees || isDeleting) {
     return <Loading />;
   }
+
   if (allEmployees.length === 0) {
     return (
       <div class="container fullPage d-flex align-items-center justify-content-center">
@@ -89,13 +106,23 @@ const AllEmployees = () => {
                 <td>{moment(user.updatedAt).format("ll")}</td>
                 <td className="table-action-button-container d-flex align-items-center justify-content-center">
                   <button
-                    className="btn btn-danger table-action-button"
+                    className={
+                      userName === "demo"
+                        ? "table-action-button-disabled"
+                        : "btn btn-primary table-action-button"
+                    }
                     onClick={() => dispatch(deleteEmployee(user._id))}
+                    disabled={userName === "demo"}
                   >
                     Delete
                   </button>
+
                   <Link
-                    className="btn btn-primary table-action-button"
+                    className={
+                      userName === "demo"
+                        ? "table-action-button-disabled"
+                        : "btn btn-primary table-action-button"
+                    }
                     to={"/admin/add-employees"}
                     onClick={() =>
                       dispatch(
@@ -116,7 +143,6 @@ const AllEmployees = () => {
                   >
                     Edit
                   </Link>
-
                   <Link
                     className="btn btn-primary table-action-button bg-success"
                     to={"/admin/view-employee"}
@@ -135,6 +161,7 @@ const AllEmployees = () => {
                         })
                       )
                     }
+                    disabled={userName === "demo"}
                   >
                     View
                   </Link>
