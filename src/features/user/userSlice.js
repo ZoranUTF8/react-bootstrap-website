@@ -14,7 +14,7 @@ import {
   addUserAvatar,
 } from "./userFunctions";
 
-const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
+const API_URL = "https://react-bootstarp-webstie-api.onrender.com/api/v1/";
 
 // initialization state
 const initialState = {
