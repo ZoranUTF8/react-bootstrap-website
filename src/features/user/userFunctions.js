@@ -3,18 +3,19 @@ import { logoutUser } from "./userSlice";
 import { clearAllEmployeesStore } from "../allEmployees/allEmployeesSlice";
 import { clearFormValues } from "../employee/employeeSlice";
 
-export const registerUserFunc = async (API_UR, user, thunkApi) => {
+export const registerUserFunc = async (API_URL, user, thunkApi) => {
   try {
-    const response = await axios.post(`${API_UR}auth/register`, user);
+    const response = await axios.post(`${API_URL}auth/register`, user);
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
   }
 };
 
-export const loginUserFunc = async (API_UR, user, thunkApi) => {
+export const loginUserFunc = async (API_URL, user, thunkApi) => {
   try {
-    const response = await axios.post(`${API_UR}auth/login`, user);
+    const response = await axios.post(`${API_URL}auth/login`, user);
+
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
