@@ -87,7 +87,7 @@ const Login = () => {
 
   // Handle demo user
   const handleDemoUser = () => {
-    dispatch(loginUser({ email: "testuser@gmail.com", password: "testuser" }));
+    dispatch(loginUser({ email: "demoUser@demo.com", password: "demouser" }));
   };
   // Toggle member
   const toggleMember = () => {

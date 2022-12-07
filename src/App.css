@@ -150,9 +150,8 @@ nav .nav-link:hover {
 }
 
 /* Profile page */
-.user-avatar {
-  width: 200px;
-  height: 200px;
+.user-profile-avatar {
+  cursor: pointer;
 }
 .navbar-user-avatar {
   width: 50px;

@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearAppStoreAndLogout } from "../../features/user/userSlice";
 import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
+import demoUserAvatar from "../../assets/images/demoUserAvatar.jpg";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   // If admin logged in exists than show employees status navbar
-  const user = useSelector((store) => store.user);
-  const isAdmin = user?.user?.isAdmin;
-  const avatarUrl = user?.user?.avatarUrl || defaultUserAvatar;
-
+  const { user } = useSelector((store) => store.user);
+  const isAdmin = user?.isAdmin;
+  let avatarUrl = user?.avatarUrl || defaultUserAvatar;
+  
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
@@ -94,7 +95,7 @@ const Navbar = () => {
                 Contact
               </Link>
             </li>
-            {!user.user && (
+            {!user && (
               <li className="nav-item">
                 <Link to="login" className="nav-link">
                   Login

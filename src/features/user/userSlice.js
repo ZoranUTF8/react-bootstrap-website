@@ -14,7 +14,7 @@ import {
   addUserAvatar,
 } from "./userFunctions";
 
-const API_URL = "https://react-bootstrap-website-api.herokuapp.com/api/v1/";
+const API_URL = "https://react-bootstarp-webstie-api.onrender.com/api/v1/";
 
 // initialization state
 const initialState = {
@@ -87,7 +87,8 @@ const userSlice = createSlice({
       const { userName, token } = payload;
       state.isLoading = false;
       state.user = payload;
-      addUserToLocalStorage({ token });
+      
+      addUserToLocalStorage(payload);
       toast.success(`Welcome back ${userName}`);
     },
     [loginUser.rejected]: (state, { payload }) => {
