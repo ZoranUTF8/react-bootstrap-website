@@ -12,6 +12,7 @@ import {
   loginUserFunc,
   clearAppStoreOnLogout,
   addUserAvatar,
+  deleteUserProfile,
 } from "./userFunctions";
 
 const API_URL = "https://react-bootstarp-webstie-api.onrender.com/api/v1/";
@@ -33,6 +34,13 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (user, thunkAPI) => {
     return loginUserFunc(API_URL, user, thunkAPI);
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (userName, thunkAPI) => {
+    return deleteUserProfile(API_URL, userName, thunkAPI);
   }
 );
 
@@ -87,7 +95,7 @@ const userSlice = createSlice({
       const { userName, token } = payload;
       state.isLoading = false;
       state.user = payload;
-      
+
       addUserToLocalStorage(payload);
       toast.success(`Welcome back ${userName}`);
     },

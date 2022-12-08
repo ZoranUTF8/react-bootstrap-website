@@ -59,11 +59,12 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
 };
 
 // Add later
-// export const delete = async (url, user, thunkApi) => {
-//   try {
-//       const response = await axios.post(`${url}auth/login`, user);
-//       return response.data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.response.data.msg);
-//     }
-// };
+export const deleteUserProfile = async (url, userName, thunkApi) => {
+  // try {
+  //   const response = await axios.post(`${url}auth/login`, user);
+  //   return response.data;
+  // } catch (error) {
+  //   return thunkApi.rejectWithValue(error.response.data.msg);
+  // }
+  console.log(userName);
+};

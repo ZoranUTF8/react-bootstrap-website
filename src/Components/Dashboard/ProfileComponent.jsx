@@ -8,10 +8,12 @@ import Modal from "../../utils/Modal";
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState({
-    title: "Delete",
-    body: "this is body",
+    title: "",
+    body: "",
+    type: "",
+    action: "",
   });
   const { user } = useSelector((store) => store.user);
 
@@ -28,6 +30,37 @@ const ProfileComponent = () => {
   };
 
   const handleProfileAction = (action) => {
+    switch (action) {
+      case "update":
+        setModalData({
+          ...modalData,
+          title: "Update user",
+          body: "Update",
+          type: "update",
+        });
+        setModal(true);
+        break;
+      case "delete":
+        setModalData({
+          ...modalData,
+          title: "Delete user account",
+          body: "Are you sure you want to delete your account?",
+          type: "delete",
+        });
+        setModal(true);
+
+        break;
+
+      default:
+        console.log(
+          "No such action: " + action + " in profile component line 38."
+        );
+        break;
+    }
+  };
+
+  const closeModal = () => {
+    setModal(false);
   };
 
   return (
@@ -84,7 +117,7 @@ const ProfileComponent = () => {
                 />
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="pwd">Password:</label>
                 <input
                   type="password"
@@ -94,7 +127,7 @@ const ProfileComponent = () => {
                   placeholder="New password"
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
 
               <div className="form-group d-flex justify-content-center gap-3">
                 <button
@@ -129,7 +162,8 @@ const ProfileComponent = () => {
         <Modal
           title={modalData.title}
           body={modalData.body}
-          hide={() => setModal(false)}
+          hide={() => closeModal()}
+          type={modalData.type}
         />
       )}
     </>
