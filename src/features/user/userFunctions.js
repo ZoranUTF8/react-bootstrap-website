@@ -15,7 +15,6 @@ export const registerUserFunc = async (API_URL, user, thunkApi) => {
 export const loginUserFunc = async (API_URL, user, thunkApi) => {
   try {
     const response = await axios.post(`${API_URL}auth/login`, user);
-
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
@@ -59,12 +58,13 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
 };
 
 // Add later
-export const deleteUserProfile = async (url, userName, thunkApi) => {
-  // try {
-  //   const response = await axios.post(`${url}auth/login`, user);
-  //   return response.data;
-  // } catch (error) {
-  //   return thunkApi.rejectWithValue(error.response.data.msg);
-  // }
-  console.log(userName);
+export const deleteUserProfile = async (API_URL, user, thunkApi) => {
+  try {
+    const response = await axios.delete(`${API_URL}auth/delete_account`, {
+      data: user,
+    });
+    return response.data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.response.data.msg);
+  }
 };

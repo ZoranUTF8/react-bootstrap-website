@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
 import userProfile from "../../assets/images/userProfile.svg";
 import demoUserAvatar from "../../assets/images/demoUserAvatar.jpg";
-import Modal from "../../utils/Modal";
+import Modal from "../Utils/Modal";
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();

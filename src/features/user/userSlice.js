@@ -39,8 +39,8 @@ export const loginUser = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
   "user/deleteUser",
-  async (userName, thunkAPI) => {
-    return deleteUserProfile(API_URL, userName, thunkAPI);
+  async (user, thunkAPI) => {
+    return deleteUserProfile(API_URL, user, thunkAPI);
   }
 );
 
@@ -114,6 +114,19 @@ const userSlice = createSlice({
       toast.success("Profile image uploaded successfully.");
     },
     [uploadUserAvatar.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [deleteUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteUser.fulfilled]: (state) => {
+      state.isLoading = false;
+      state.user = null;
+      removeUserFromLocalStorage();
+      toast.success("Account deleted successfully.");
+    },
+    [deleteUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },

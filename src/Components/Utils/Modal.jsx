@@ -1,14 +1,11 @@
 import React from "react";
-import { deleteUser } from "../features/user/userSlice";
+import { deleteUser } from "../../features/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Modal = ({ title, body, hide, type }) => {
-  const {
-    user: { userName },
-    isLoading,
-  } = useSelector((store) => store.user);
+  const { user, isLoading } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,8 +17,8 @@ const Modal = ({ title, body, hide, type }) => {
   const handleConfirm = (type) => {
     switch (type) {
       case "delete":
-        if (userName !== "demo") {
-          dispatch(deleteUser(userName));
+        if (user.userName !== "demo") {
+          dispatch(deleteUser(user));
         } else {
           toast.error("Cannot delete demo user", {
             position: "top-right",
@@ -53,7 +50,7 @@ const Modal = ({ title, body, hide, type }) => {
             <h5 className="modal-title" id="exampleModalLabel">
               {title}
             </h5>
-            <button type="button" class="btn-close" onClick={hide}></button>
+            <button type="button" className="btn-close" onClick={hide}></button>
           </div>
           <div className="modal-body">{body}</div>
           <div className="modal-footer">
