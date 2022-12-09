@@ -42,12 +42,15 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
     data.append("file", userAvatar);
     data.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
     data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+
     console.log(process.env.REACT_APP_CLOUD_NAME);
+
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
         data
       );
+      console.log(`RESPONSE IS: ${response}`);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
