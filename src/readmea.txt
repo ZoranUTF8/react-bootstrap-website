@@ -4,6 +4,11 @@
 
  //! Add delete and update user
 
+ //! Add normal user logout option
+ 
+//! Add user data to local storage on reload
+
+//! Fix allUsers rendering the toast
  
 
  Check if possible to remove asAdmin from the local storage

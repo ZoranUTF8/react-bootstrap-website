@@ -28,14 +28,14 @@ const AllEmployees = () => {
   const { isLoading } = useSelector((store) => store.employee);
 
   const {
-    user: { userName },
+    user: { userName, isAdmin },
   } = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch(getEmployees());
 
-    if (userName === "demo") {
-      toast.error("Demo user, limited functions.", {
+    if (userName || !isAdmin === "demo") {
+      toast.error("Regular user, limited functionality .", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -107,7 +107,7 @@ const AllEmployees = () => {
                 <td className="table-action-button-container d-flex align-items-center justify-content-center">
                   <button
                     className={
-                      userName === "demo"
+                      userName || !isAdmin === "demo"
                         ? "table-action-button-disabled"
                         : "btn btn-primary table-action-button"
                     }
@@ -119,7 +119,7 @@ const AllEmployees = () => {
 
                   <Link
                     className={
-                      userName === "demo"
+                      userName || !isAdmin === "demo"
                         ? "table-action-button-disabled"
                         : "btn btn-primary table-action-button"
                     }

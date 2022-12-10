@@ -10,8 +10,9 @@ const Navbar = () => {
   // If admin logged in exists than show employees status navbar
   const { user } = useSelector((store) => store.user);
   const isAdmin = user?.isAdmin;
+  const loggedInUser = user?.token;
   let avatarUrl = user?.avatarUrl || defaultUserAvatar;
-  
+
   return (
     <nav className="navbar navbar-expand-md bg-light">
       <div className="container">
@@ -33,7 +34,7 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0  d-flex align-items-center">
-            {isAdmin && (
+            {loggedInUser && (
               <li className="nav-item dropdown">
                 <img
                   src={avatarUrl}
@@ -42,7 +43,7 @@ const Navbar = () => {
                   alt="user_avatar"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{ "border-radius": "50%" }}
+                  style={{ "borderRadius": "50%" }}
                   role="button"
                   className="nav-link dropdown-toggle navbar-avatar"
                 />
