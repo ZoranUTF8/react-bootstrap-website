@@ -5,40 +5,32 @@ import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
 import userProfile from "../../assets/images/userProfile.svg";
 import demoUserAvatar from "../../assets/images/demoUserAvatar.jpg";
 import Modal from "../Utils/Modal";
+import UpdateUserModal from "../Utils/UpdateUserModal";
+import Loading from "../Loading/Loading";
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
+
   const [modal, setModal] = useState(false);
+  const [updateUserModal, setUpdateUserModal] = useState(false);
+
   const [modalData, setModalData] = useState({
     title: "",
     body: "",
     type: "",
     action: "",
   });
-  const { user } = useSelector((store) => store.user);
+  const { user, isLoading } = useSelector((store) => store.user);
 
   const [userData, setUserData] = useState({
     userName: user?.userName || "",
     avatarUrl: user?.avatarUrl || demoUserAvatar,
-    userEmail: "",
-    userPassword: "",
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-  };
 
   const handleProfileAction = (action) => {
     switch (action) {
       case "update":
-        setModalData({
-          ...modalData,
-          title: "Update user",
-          body: "Update",
-          type: "update",
-        });
-        setModal(true);
+        setUpdateUserModal(true);
         break;
       case "delete":
         setModalData({
@@ -59,10 +51,15 @@ const ProfileComponent = () => {
     }
   };
 
-  const closeModal = () => {
-    setModal(false);
+  const closeModal = (type) => {
+    type === "delete" ? setModal(false) : setUpdateUserModal(false);
   };
+  {
+  }
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="container fullPage">
@@ -78,9 +75,7 @@ const ProfileComponent = () => {
                     id="userName"
                     name="userName"
                     value={userData.userName}
-                    onChange={handleChange}
-                    data-toggle="modal"
-                    data-target="#userProfileModal"
+                    readOnly={true}
                   />
                 </div>
                 <div className="col-md-6 d-flex justify-content-center">
@@ -92,42 +87,6 @@ const ProfileComponent = () => {
                   />
                 </div>
               </div>
-
-              <div className="form-group">
-                <label htmlFor="pwd">Password:</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="pwd"
-                  name="userPassword"
-                  value={userData.userPassword}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email address:</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="userEmail"
-                  value={userData.userEmail}
-                  onChange={handleChange}
-                />
-              </div>
-
-              {/* <div className="form-group">
-                <label htmlFor="pwd">Password:</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="pwd"
-                  value={userData.userPassword}
-                  placeholder="New password"
-                  onChange={handleChange}
-                />
-              </div> */}
 
               <div className="form-group d-flex justify-content-center gap-3">
                 <button
@@ -162,10 +121,11 @@ const ProfileComponent = () => {
         <Modal
           title={modalData.title}
           body={modalData.body}
-          hide={() => closeModal()}
+          hide={() => closeModal("delete")}
           type={modalData.type}
         />
       )}
+      {updateUserModal && <UpdateUserModal hide={() => closeModal("update")} />}
     </>
   );
 };

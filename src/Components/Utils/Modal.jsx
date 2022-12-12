@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Modal = ({ title, body, hide, type }) => {
-  const { user, isLoading } = useSelector((store) => store.user);
+
+  const { user } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,6 +33,21 @@ const Modal = ({ title, body, hide, type }) => {
           navigate("/admin");
         }
         break;
+      case "update":
+        if (user.userName === "demo") {
+          // dispatch(deleteUser(user));
+        } else {
+          toast.error("Cannot update demo user", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          });
+          navigate("/admin");
+        }
 
       default:
         break;
@@ -61,7 +77,7 @@ const Modal = ({ title, body, hide, type }) => {
             >
               Confirm
             </button>
-            <button type="button" className="btn btn-primary" onClick={hide}>
+            <button type="button" className="btn btn-secondary" onClick={hide}>
               Cancel
             </button>
           </div>

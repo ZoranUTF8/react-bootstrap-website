@@ -13,6 +13,7 @@ import {
   clearAppStoreOnLogout,
   addUserAvatar,
   deleteUserProfile,
+  updateUserCredentials,
 } from "./userFunctions";
 
 const API_URL = "https://react-bootstarp-webstie-api.onrender.com/api/v1/";
@@ -34,6 +35,13 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (user, thunkAPI) => {
     return loginUserFunc(API_URL, user, thunkAPI);
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (user, thunkAPI) => {
+    return updateUserCredentials(API_URL, user, thunkAPI);
   }
 );
 
@@ -129,6 +137,20 @@ const userSlice = createSlice({
     [deleteUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+    // ! To finish
+    [updateUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateUser.fulfilled]: (state) => {
+      state.isLoading = false;
+      // state.user = null;
+      // removeUserFromLocalStorage();
+      // toast.success("Account deleted successfully.");
+    },
+    [updateUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      // toast.error(payload);
     },
   },
 });

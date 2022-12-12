@@ -4,7 +4,7 @@
 
  //! Add delete and update user
 
- //! Add normal user logout option
+
  
 //! Add user data to local storage on reload
 

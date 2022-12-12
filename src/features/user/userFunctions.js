@@ -48,7 +48,7 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
         data
       );
-      
+
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -58,7 +58,14 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
   }
 };
 
-// Add later
+export const updateUserCredentials = async (API_URL, user, thunkApi) => {
+  try {
+    console.log("USERS DETAILS", user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deleteUserProfile = async (API_URL, user, thunkApi) => {
   try {
     const response = await axios.delete(`${API_URL}auth/delete_account`, {

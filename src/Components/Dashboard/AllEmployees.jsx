@@ -34,7 +34,7 @@ const AllEmployees = () => {
   useEffect(() => {
     dispatch(getEmployees());
 
-    if (userName || !isAdmin === "demo") {
+    if (userName === "demo" || !isAdmin) {
       toast.error("Regular user, limited functionality .", {
         position: "top-right",
         autoClose: 5000,
@@ -107,9 +107,9 @@ const AllEmployees = () => {
                 <td className="table-action-button-container d-flex align-items-center justify-content-center">
                   <button
                     className={
-                      userName || !isAdmin === "demo"
+                      userName === "demo" || !isAdmin
                         ? "table-action-button-disabled"
-                        : "btn btn-primary table-action-button"
+                        : "btn btn-danger table-action-button"
                     }
                     onClick={() => dispatch(deleteEmployee(user._id))}
                     disabled={userName === "demo"}
@@ -119,7 +119,7 @@ const AllEmployees = () => {
 
                   <Link
                     className={
-                      userName || !isAdmin === "demo"
+                      userName === "demo" || !isAdmin
                         ? "table-action-button-disabled"
                         : "btn btn-primary table-action-button"
                     }
@@ -161,7 +161,6 @@ const AllEmployees = () => {
                         })
                       )
                     }
-                    disabled={userName === "demo"}
                   >
                     View
                   </Link>
