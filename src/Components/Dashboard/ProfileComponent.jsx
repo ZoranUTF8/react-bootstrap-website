@@ -54,8 +54,6 @@ const ProfileComponent = () => {
   const closeModal = (type) => {
     type === "delete" ? setModal(false) : setUpdateUserModal(false);
   };
-  {
-  }
 
   if (isLoading) {
     return <Loading />;
@@ -81,7 +79,7 @@ const ProfileComponent = () => {
                 <div className="col-md-6 d-flex justify-content-center">
                   <img
                     src={userData.avatarUrl}
-                    class="rounded img-thumbnail w-50 user-profile-avatar"
+                    className="rounded img-thumbnail w-50 user-profile-avatar"
                     alt="user avatar"
                     name="userAvatar"
                   />

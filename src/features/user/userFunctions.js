@@ -57,12 +57,18 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
     return thunkApi.rejectWithValue("Check your file type");
   }
 };
-
+// Add username as param so we can have a new name
 export const updateUserCredentials = async (API_URL, user, thunkApi) => {
   try {
-    console.log("USERS DETAILS", user);
+    // const response = await axios.post(`${API_URL}auth/update`, user);
+    const response = await axios.patch(
+      "http://localhost:3000/api/v1/auth/update",
+      user
+    );
+
+    return response.data;
   } catch (error) {
-    console.log(error);
+    return thunkApi.rejectWithValue(error.response.data.msg);
   }
 };
 

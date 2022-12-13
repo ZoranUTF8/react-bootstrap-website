@@ -32,6 +32,19 @@ const UpdateUserModal = ({ hide }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (user.userName === "demo") {
+      toast.error("Cannot update demo user values.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+      return;
+    }
+
     const { userName, email, avatarUrl, password, repeatedPassword } =
       userValues;
 

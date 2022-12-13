@@ -138,19 +138,22 @@ const userSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
-    // ! To finish
+    
     [updateUser.pending]: (state) => {
       state.isLoading = true;
     },
-    [updateUser.fulfilled]: (state) => {
+    [updateUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      // state.user = null;
-      // removeUserFromLocalStorage();
-      // toast.success("Account deleted successfully.");
+      state.isLoading = false;
+      state.user = payload;
+
+      removeUserFromLocalStorage();
+      addUserToLocalStorage(payload);
+      toast.success("User details updated successfully.");
     },
     [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      // toast.error(payload);
+      toast.error(payload);
     },
   },
 });
