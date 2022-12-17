@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
@@ -21,11 +21,6 @@ const ProfileComponent = () => {
     action: "",
   });
   const { user, isLoading } = useSelector((store) => store.user);
-
-  const [userData, setUserData] = useState({
-    userName: user?.userName || "",
-    avatarUrl: user?.avatarUrl || demoUserAvatar,
-  });
 
   const handleProfileAction = (action) => {
     switch (action) {
@@ -65,20 +60,20 @@ const ProfileComponent = () => {
           <div className="col-md-12 col-lg-6 ">
             <div className="row gy-3">
               <div className="row gy-3 gx-3">
-                <div className="col-md-6 align-self-center">
+                <div className="col-md-6 align-self-center text-center">
                   <label htmlFor="userName">Username:</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control text-center"
                     id="userName"
                     name="userName"
-                    value={userData.userName}
+                    value={user?.userName || "No user name"}
                     readOnly={true}
                   />
                 </div>
                 <div className="col-md-6 d-flex justify-content-center">
                   <img
-                    src={userData.avatarUrl}
+                    src={user?.avatarUrl || demoUserAvatar}
                     className="rounded img-thumbnail w-50 user-profile-avatar"
                     alt="user avatar"
                     name="userAvatar"
