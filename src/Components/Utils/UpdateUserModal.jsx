@@ -1,19 +1,22 @@
 import { useState } from "react";
-import { deleteUser } from "../../features/user/userSlice";
+import { uploadUserAvatar } from "../../features/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { updateUser } from "../../features/user/userSlice";
+import Loading from "../Loading/Loading";
 
 const UpdateUserModal = ({ hide }) => {
-  const { user } = useSelector((store) => store.user);
+  const { user, isLoading } = useSelector((store) => store.user);
+
+  const [imageFile, setImageFile] = useState("");
 
   const [userValues, setUserValues] = useState({
     userName: user.userName || "",
     email: user.email || "",
-    avatarUrl: user.avatarUrl || "",
     password: user.password || "",
     repeatedPassword: "",
+    avatarUrl: user.avatarUrl,
   });
 
   const navigate = useNavigate();
@@ -29,7 +32,7 @@ const UpdateUserModal = ({ hide }) => {
     setUserValues({ ...userValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (user.userName === "demo") {
@@ -45,8 +48,7 @@ const UpdateUserModal = ({ hide }) => {
       return;
     }
 
-    const { userName, email, avatarUrl, password, repeatedPassword } =
-      userValues;
+    const { userName, email, password, repeatedPassword } = userValues;
 
     if (password !== repeatedPassword) {
       toast.error("Passwords do not match.", {
@@ -69,9 +71,22 @@ const UpdateUserModal = ({ hide }) => {
         theme: "light",
       });
     } else {
-      dispatch(updateUser(userValues));
+      if (imageFile !== "") {
+        const data = await dispatch(uploadUserAvatar(imageFile));
+
+        const newAvatar = data?.payload?.url;
+
+        dispatch(updateUser({ ...userValues, avatarUrl: newAvatar }));
+      } else {
+        dispatch(updateUser(userValues));
+      }
       hide();
     }
+  };
+
+  const handleFile = (e) => {
+    let file = e.target.files[0];
+    setImageFile(file);
   };
 
   return (
@@ -147,6 +162,20 @@ const UpdateUserModal = ({ hide }) => {
                   value={userValues.repeatedPassword}
                   onChange={handleChange}
                   autoComplete="newPassword"
+                />
+                <small id="passwordHelp" className="form-text text-muted">
+                  Make sure your passwords match.
+                </small>
+              </div>
+              <div className="form-group">
+                <label htmlFor="avatarUpload">Repeat password</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="avatarUpload"
+                  placeholder="Avatar"
+                  name="avatarUpload"
+                  onChange={handleFile}
                 />
                 <small id="passwordHelp" className="form-text text-muted">
                   Make sure your passwords match.

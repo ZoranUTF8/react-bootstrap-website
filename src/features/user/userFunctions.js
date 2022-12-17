@@ -48,7 +48,6 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
         data
       );
-
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -59,13 +58,13 @@ export const addUserAvatar = async (userAvatar, thunkApi) => {
 };
 // Add username as param so we can have a new name
 export const updateUserCredentials = async (API_URL, user, thunkApi) => {
+
   try {
     // const response = await axios.post(`${API_URL}auth/update`, user);
     const response = await axios.patch(
       "http://localhost:3000/api/v1/auth/update",
       user
     );
-
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
