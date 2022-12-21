@@ -2,6 +2,7 @@
 :root {
   --generalInfo: #1e90ff;
   --generalWhite: #ffffff;
+  --generalGray: #808080;
 }
 .fullPage {
   min-height: 80vh;
@@ -170,4 +171,16 @@ nav .nav-link:hover {
   .dropdown:hover .dropdown-menu {
     display: block;
   }
+}
+
+/* Clock component */
+.clock-container {
+  color: var(--generalGray);
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+
+}
+.clock-container p{
+  margin: 0;
 }

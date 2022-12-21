@@ -11,6 +11,7 @@ import AddEmployee from "./Dashboard/AddEmployee";
 import AllEmployees from "./Dashboard/AllEmployees";
 import ViewEmployee from "./Dashboard/ViewEmployee";
 import Stats from "./Dashboard/Stats";
+import ClockComponent from "./Clock/ClockComponent";
 export {
   Navbar,
   Footer,
@@ -24,5 +25,6 @@ export {
   AddEmployee,
   AllEmployees,
   ViewEmployee,
-  Stats
+  Stats,
+  ClockComponent,
 };

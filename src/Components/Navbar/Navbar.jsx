@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ClockComponent from "../Clock/ClockComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { clearAppStoreAndLogout } from "../../features/user/userSlice";
 import defaultUserAvatar from "../../assets/images/defaultUserAvatar.jpeg";
@@ -18,6 +19,7 @@ const Navbar = () => {
       <div className="container">
         <Link to={"/"} className="navbar-brand ">
           <h4 className="display-6">Company Name</h4>
+          <ClockComponent />
         </Link>
 
         <button
@@ -43,7 +45,7 @@ const Navbar = () => {
                   alt="user_avatar"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{ "borderRadius": "50%" }}
+                  style={{ borderRadius: "50%" }}
                   role="button"
                   className="nav-link dropdown-toggle navbar-avatar"
                 />
