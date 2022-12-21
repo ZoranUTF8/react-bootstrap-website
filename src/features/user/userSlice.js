@@ -138,7 +138,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
-    
+
     [updateUser.pending]: (state) => {
       state.isLoading = true;
     },
